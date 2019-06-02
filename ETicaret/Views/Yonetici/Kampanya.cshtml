@@ -1,0 +1,118 @@
+﻿@using ETicaret.Models
+@model List<Kampanya>
+
+@{
+    ViewBag.Title = "Kampanya";
+    Layout = "~/Views/Shared/_LayoutYonetici.cshtml";
+}
+
+<div class="card">
+
+    <div class="card-header">
+        <h3 class="card-title"><b>Kampanyalar</b>&nbsp;(@Model.Count tane kampanya bulundu...)</h3>
+
+        <div class="card-tools">
+            <a href="/Yonetici/KampanyaSec" class="btn btn-info btn-sm">
+                <i class="fa fa-plus-square-o"></i> Yeni Kampanya Ekle
+            </a>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0" style="display: block;">
+        @if (TempData["KAEkle"] != null)
+        {
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fa fa-check"></i> Başarılı!</h5>
+                @TempData["KAEkle"]
+            </div>
+        }
+        @if (TempData["KASil"] != null)
+        {
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fa fa-check"></i> Başarılı!</h5>
+                @TempData["KASil"]
+            </div>
+        }
+        @if (TempData["KADuzenle"] != null)
+        {
+            <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fa fa-info"></i> Başarılı!</h5>
+                @TempData["KADuzenle"]
+            </div>
+        }
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th> <img src="~/Content/Resimler/Kullanici/countdown.png" />Kampanya Id</th>
+                    <th><img src="~/Content/Resimler/Kullanici/rss.png" />Kampanya Tür Id</th>
+                    <th><img src="~/Content/Resimler/Kullanici/crd.png" />Kampanya Tür Özellik</th>
+                    <th><img src="~/Content/Resimler/Kullanici/store.png" />Kampanya Etkilenen Tip</th>
+                    <th><img src="~/Content/Resimler/Kullanici/mail.png" />İndirim Oran</th>
+                    <th><img src="~/Content/Resimler/Kullanici/calendar.png" />Başlangıç Tarih</th>
+                    <th><img src="~/Content/Resimler/Kullanici/envelope.png" />Bitiş Tarih</th>
+                    <th><img src="~/Content/Resimler/Kullanici/negotiation.png" />İşlemler</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var kampanya in Model)
+                {
+                <tr>
+
+                    <td>@kampanya.kampanyaId </td>
+                    <td>@kampanya.kampanyaTurId</td>
+                    @if (kampanya.kampanyaTurId == 1)
+                    {
+                        <td>Kategori</td>
+                    }
+                    else if (kampanya.kampanyaTurId == 2)
+                    {
+                        <td>AltKategori</td>
+                    }
+                    else if (kampanya.kampanyaTurId == 3)
+                    {
+                        <td>Marka</td>
+                    }
+                    <td>@kampanya.kampanyaTip</td>
+                    <td>%@kampanya.kampanyaIndirimOran</td>
+                    <td>@kampanya.kampanyaBaslangicTarih</td>
+                    @if (kampanya.kampanyabitisTarih == null)
+                    {
+                        <td>Belirtilmedi</td>
+                    }
+                    else
+                    {
+                    <td>@kampanya.kampanyabitisTarih</td>
+                    }
+                    <td>
+                        <a title="Düzenle" class="btn btn-primary" href="/Yonetici/KampanyaDuzenle/@kampanya.kampanyaId?==kampanyaId">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a onclick="return confirm('İptal etmek istediğinizden istediğinizden emin misiniz ?')" title="Sil" class="btn btn-danger" href="/Yonetici/KampanyaIptal/@kampanya.kampanyaId?==kampanyaId">
+                            <i class="fa fa-remove"></i>
+                        </a>
+
+                    </td>
+                </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+    </div>
+    <script src="~/Content/Tema1/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/Tema1/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/Tema1/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/Tema1/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <!-- SlimScroll -->
+    <script src="~/Content/Tema1/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <!-- /.card-body -->
+</div>
+

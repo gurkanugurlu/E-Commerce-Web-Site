@@ -1,0 +1,85 @@
+﻿@using ETicaret.Models;
+
+
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<!-- Head -->
+<head>
+
+    <title>Ego Toys Giriş Formu</title>
+
+    <!-- Meta-Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="keywords" content="Sleek Login Form Widget Responsive, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //Meta-Tags -->
+    <!-- Style -->
+    <link rel="stylesheet" href="~/Content/loginTema/web/css/style.css" type="text/css" media="all">
+
+    <!-- Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <!-- //Fonts -->
+
+</head>
+<!-- //Head -->
+<!-- Body -->
+<body>
+
+    <h1>EgoToysa Hoşgeldiniz...</h1>
+
+    <h2>Hesabınıza Giriş Yapin...</h2>
+    
+    @using (Html.BeginForm("Index","Login",FormMethod.Post))
+    {
+    <div class="w3layoutscontaineragileits">
+        <input type="text" Name="kullaniciMail" placeholder="Email Adresiniz..." required="">
+
+        <input type="password" Name="kullaniciSifre" placeholder="Şifreniz" required="">
+        
+        <span>@ViewBag.Sonuc</span> 
+        
+        <ul class="agileinfotickwthree" style="float:left">
+            <li>
+                <input type="checkbox" id="brand1" value="">
+                <label for="brand1"><span></span>Beni Hatirla</label>
+            </li>
+            <li style="float:right">
+                <p><a href="/Kayit/Index"><i style="color:white"> Hesabınız Yok Mu? </i><span style="color:white">→</span></a></p>
+            </li>
+           
+        </ul>
+        <div class="aitssendbuttonw3ls">
+            <ul><li>
+            <input type="submit" value="GİRİS" style="margin-top:-20px; margin-left:10px">
+                
+                </li>
+                <li style="margin-left:20px">
+                 <p><a href="/Login/SifreUnuttum"><i style="color:white"> Şifremi Unuttum... </i><span style="color:white">→</span></a></p>
+                </li>
+            
+
+                </ul>
+        </div>
+    </div>
+    
+    
+    }
+
+
+    
+
+ 
+
+</body>
+<!-- //Body -->
+
+</html>

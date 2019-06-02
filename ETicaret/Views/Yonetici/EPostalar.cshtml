@@ -1,0 +1,74 @@
+﻿@using ETicaret.Models
+@using ETicaret.Settings
+@model  List<EpostaYayınla>
+@{
+    ViewBag.Title = "EPostalar";
+    Layout = "~/Views/Shared/_LayoutYonetici.cshtml";
+}
+
+<div class="card">
+
+    <div class="card-header">
+        <h3 class="card-title"><b>Eposta Yayınlama</b>&nbsp;(@Model.Count tane ePosta bulundu...)</h3>
+
+        <div class="card-tools">
+            <a href="/Yonetici/EPostaEkle" class="btn btn-info btn-sm">
+                <i class="fa fa-plus-square-o"></i> Yeni Bir Eposta oluştur
+            </a>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0" style="display: block;">
+        @if (TempData["PEkle"] != null)
+        {
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fa fa-check"></i> Başarılı!</h5>
+                @TempData["PEkle"]
+            </div>
+        }
+        
+
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    
+                    <th> <img src="~/Content/Resimler/Kullanici/countdown.png" />Id</th>
+                    <th><img src="~/Content/Resimler/Kullanici/envelope.png" />Konu</th>
+                    <th><img src="~/Content/Resimler/Kullanici/mail.png" />İçerik</th>
+                    
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var eposta in Model)
+                {
+                    <tr>
+                        
+                        <td>@eposta.ePostaId</td>
+                        <td>@eposta.ePostaKonu</td>
+                        <td>@eposta.ePostaIcerik</td>
+
+
+                       
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+    </div>
+    <script src="~/Content/Tema1/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/Tema1/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/Tema1/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/Tema1/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <!-- SlimScroll -->
+    <script src="~/Content/Tema1/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <!-- /.card-body -->
+</div>
+
+

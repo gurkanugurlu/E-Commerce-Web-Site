@@ -1,0 +1,115 @@
+﻿@using ETicaret.Models;
+@model List<Urun>
+@{
+    ViewBag.Title = "UrunleriGor";
+    Layout = "~/Views/Shared/_LayoutYonetici.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title"><b>@ViewBag.KategoriAd Urunleri Listelendi... </b></h3>
+
+        <div class="card-tools">
+            
+                
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0" style="display: block;">
+       
+        
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th><img src="~/Content/Resimler/Kullanici/camera.png" />Resim</th>
+                    <th><img src="~/Content/Resimler/Kullanici/countdown.png" />Id</th>
+                    <th><img src="~/Content/Resimler/Kullanici/users.png" />Ad</th>
+                    <th><img src="~/Content/Resimler/Kullanici/rss.png" />Marka</th>
+                    <th><img src="~/Content/Resimler/Kullanici/calendar.png" />Eklenme Tarihi</th>
+                    <th><img src="~/Content/Resimler/Kullanici/diagram.png" />Urun Yaş</th>
+                    <th><img src="~/Content/Resimler/Kullanici/warehouse.png" />Stok Sayisi</th>
+                    <th><img src="~/Content/Resimler/Kullanici/earnings.png" />Aktiflik</th>
+                    <th><img src="~/Content/Resimler/Kullanici/star.png" />Boyut</th>
+                    <th><img src="~/Content/Resimler/Kullanici/palet.png" />Renk</th>
+                    <th><img src="~/Content/Resimler/Kullanici/backend.png" />AltKategorisi</th>
+                    <th><img src="~/Content/Resimler/Kullanici/mail.png" />Tanim</th>
+                    <th><img src="~/Content/Resimler/Kullanici/budget2.png" />Fiyat</th>
+                    
+                    
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var urun in Model)
+                {
+                    <tr>
+                        <td style="width:40px;text-align:center;">
+                            <img src="~/Content/Resimler/Kullanici/@urun.urunTekResim" style="width:30px;" />
+                        </td>
+                        <td>@urun.urunId</td>
+                        <td>@urun.urunAd</td>
+
+                        <td>@urun.Marka.markaAd</td>
+                        <td>@urun.urunEklenmeTarih</td>
+                        <td>@urun.urunYas</td>
+                        <td>@urun.urunStokSayisi</td>
+
+                        @if (urun.urunAktifMi == true)
+                        {
+                            <td>Evet</td>
+                        }
+                        @if (urun.urunAktifMi != true)
+                        {
+                            <td>Hayır</td>
+                        }
+
+                        <td>@urun.urunBoyut</td>
+                        <td>@urun.urunRenk</td>
+                        <td>@urun.AltKategori.altKategoriAd</td>
+                        <td>@urun.urunTanim</td>
+                        <td>@urun.urunFiyat</td>
+                        
+
+
+
+
+                        @* @try
+                            { foreach(var puan in (List<Puan>)ViewBag.UrunPuan)
+                                {
+
+                                    if (puan.urunId == urun.urunId)
+                                    {
+                                     <td>@puan.puan1</td>
+                                 }
+                                 else
+                                 {
+                                     <td>Puanı Yoktur</td>
+                                    }
+                                }
+
+
+                            }
+                            catch (Exception ex)
+                            {
+
+                                <td>@ex.Message="hata"</td>
+
+                            }*@
+
+
+
+
+                        
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+    </div>
+    <!-- /.card-body -->
+</div>
+

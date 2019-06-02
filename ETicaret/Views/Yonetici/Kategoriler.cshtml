@@ -1,0 +1,90 @@
+﻿@using ETicaret.Models;
+@model List<Kategori>
+@{
+    ViewBag.Title = "Kategoriler";
+    Layout = "~/Views/Shared/_LayoutYonetici.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title"><b> Kategoriler </b>(@Model.Count tane kategori bulundu) </h3>
+
+        <div class="card-tools">
+            <a href="/Yonetici/KategorilerEkle" class="btn btn-info btn-sm">
+                <i class="fa fa-plus-square-o"></i> Yeni Kategori Ekle
+            </a>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0" style="display: block;">
+        @if (TempData["KaEkle"] != null)
+        {
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fa fa-check"></i> Başarılı!</h5>
+                @TempData["KaEkle"]
+            </div>
+        }
+        @if (TempData["KaDuzenle"] != null)
+        {
+            <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fa fa-info"></i> Başarılı!</h5>
+                @TempData["KaDuzenle"]
+            </div>
+        }
+        @if (TempData["KaSil"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fa fa-ban"></i> Başarılı!</h5>
+                @TempData["KaSil"]
+            </div>
+        }
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th><img src="~/Content/Resimler/Kullanici/camera.png" width="16" height="16"/>Resim</th>
+                    <th><img src="~/Content/Resimler/Kullanici/countdown.png" width="16" height="16" />Id</th>
+                    <th><img src="~/Content/Resimler/Kullanici/users.png" width="16" height="16"/>Ad</th>
+                    <th><img src="~/Content/Resimler/Kullanici/mail.png" width="16" height="16"/>Tanım</th>
+                    <th><img src="~/Content/Resimler/Kullanici/negotiation.png" width="16" height="16"/>İşlemler</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var kategori in Model)
+                {
+                    <tr>
+                        <td style="width:40px;text-align:center;">
+                            <img src="~/Content/Resimler/Kullanici/@kategori.kategoriResim" style="width:30px;" />
+                        </td>
+                        <td>@kategori.kategoriId</td>
+                        <td>@kategori.kategoriAd</td>
+                        <td>@kategori.kategoriTanim</td>
+
+                        <td>
+                            <a title="Düzenle" class="btn btn-primary" href="/Yonetici/KategorilerDuzenle/@kategori.kategoriId?==kategoriId">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a onclick="return confirm('Silmek istediğinizden emin misiniz ?')" title="Sil" class="btn btn-danger" href="/Yonetici/KategorilerSil/@kategori.kategoriId?==kategoriId">
+                                <i class="fa fa-remove"></i>
+                            </a>
+                            <a title="Detay" class="btn btn-warning" href="/Yonetici/AltKategoriGor/@kategori.kategoriId?==kategoriId">
+                                <i class="fa fa-question-circle-o"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+    </div>
+    <!-- /.card-body -->
+</div>
+
+

@@ -1,0 +1,385 @@
+﻿@using ETicaret.Models;
+@using ETicaret.Models.ModelsView
+@model  UrunMarkaCocukYorum
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--A Design by W3layouts
+   Author: W3layout
+   Author URL: http://w3layouts.com
+   License: Creative Commons Attribution 3.0 Unported
+   License URL: http://creativecommons.org/licenses/by/3.0/
+   -->
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <script src='~/Content/Tema/web/js/jquery-2.2.3.min.js'>
+    </script>
+</head>
+   <body>
+       <div class="slider text-center">
+           <div class="callbacks_container">
+               <ul class="rslides" id="slider4">
+                   <li>
+                       <div class="slider-img one-img">
+                           <div class="container">
+                               <div class="slider-info ">
+                                   <h5>Çocuklarınız İçin<br>En İyi Tercihler</h5>
+                                   <div class="bottom-info">
+                                       <p>1865 te kurulan ve kurulduğu günden beri tek mottosu "Kalite" olan EgoToys'a hoşgeldiniz.En kaliteli markaları bünyesinde bulunduran EgoToys hakkinda bilgi almak için Tıklayiniz.</p>
+                                   </div>
+                                   <div class="outs_more-buttn">
+                                       <a href="/Home/About">Tikla</a>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </li>
+                   <li>
+                       <div class="slider-img two-img">
+                           <div class="container">
+                               <div class="slider-info ">
+                                   <h5>En kaliteli ayıcıklara ulaşmak bir tik uzağında<br></h5>
+                                   <div class="bottom-info">
+                                       <p> En kaliteli ayıcıklar bir tık uzağınızda...</p>
+                                   </div>
+                                   <div class="outs_more-buttn">
+                                       <a href="/Urun/Index">Tikla</a>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </li>
+                   <li>
+                       <div class="slider-img three-img">
+                           <div class="container">
+                               <div class="slider-info">
+                                   <h5>Çocuklariniz için en kaliteli ve eğlenceli oyuncaklar<br> </h5>
+                                   <div class="bottom-info">
+                                       <p>Birçok markanın bulunduğu tüm oyuncuklar türlerine ulaşmak için tıklayiniz...</p>
+                                   </div>
+                                   <div class="outs_more-buttn">
+                                       <a href="/Kategori/Index/1">Tikla</a>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </li>
+               </ul>
+           </div>
+       </div>
+       <!-- This is here just to demonstrate the callbacks -->
+       <!-- <ul class="events">
+    <li>Example 4 callback events</li>
+    </ul>-->
+       <div class="clearfix"></div>
+       <section class="about py-lg-4 py-md-3 py-sm-3 py-3" id="about">
+           <div class="container py-lg-5 py-md-5 py-sm-4 py-4">
+               <h3 class="title text-center mb-lg-5 mb-md-4  mb-sm-4 mb-3">YAŞ ARALIKLARI</h3>
+               <div class="row banner-below-w3l" style="margin-left:15px">
+                   <div class="outs_more-buttn">
+                       <a  href="/Urun/YasAra/2">
+                           <p style="text-align:center; color:white; font-size:35px"><b>0-2</b></p>
+                           <b style="color:white;">YAŞ ARALIĞI</b>
+                       </a>
+                   </div>
+                   <div class="outs_more-buttn" style="margin-left:25px; color:white;">
+                       <a  href="/Urun/YasAra/3">
+                           <p style="text-align:center; font-size:35px;"><b>2-4</b></p>
+                           <b style="color:white;">YAŞ ARALIĞI</b>
+                       </a>
+                   </div >
+                   <div class="outs_more-buttn" style="margin-left:25px;color:white;">
+                       <a  href="/Urun/YasAra/3">
+                           <p style="text-align:center; font-size:35px"><b>4-6</b></p>
+                           <b style="color:white;">YAŞ ARALIĞI</b>
+                       </a>
+                   </div>
+                   <div class="outs_more-buttn" style="margin-left:25px; color:white;">
+                       <a  href="/Urun/YasAra/6">
+                           <p style="text-align:center; font-size:35px"><b>6-8</b></p>
+                           <b style="color:white;">YAŞ ARALIĞI</b>
+                       </a>
+                   </div>
+                   <div class="outs_more-buttn" style="margin-left:25px; color:white;">
+                       <a  href="/Urun/YasAra/6">
+                           <p style="text-align:center; font-size:35px"><b>8-10</b></p>
+                           <b>YAŞ ARALIĞI</b>
+                       </a>
+                   </div>
+                   <div class="outs_more-buttn" style="margin-left:25px;color:white;">
+                       <a href="/Urun/YasAra/10">
+                           <p style="text-align:center; font-size:35px"><b>10+</b></p>
+                           <b>YAŞ ARALIĞI</b>
+                       </a>
+                   </div>
+
+               </div>
+           </div>
+       </section>
+
+       <section class="about py-lg-4 py-md-3 py-sm-3 py-3" id="about">
+           <div class="container py-lg-5 py-md-5 py-sm-4 py-4">
+               <h3 class="title text-center mb-lg-5 mb-md-4  mb-sm-4 mb-3">INDIRIMLI URUNLER</h3>
+               <div class="row banner-below-w3l">
+                   @foreach (var urun in(List<Urun>) ViewBag.Indirim)
+                   {
+                       <div class="col-lg-4 col-md-6 col-sm-6 text-center banner-agile-flowers">
+                           <img src="~/Content/Resimler/Kullanici/@urun.urunTekResim" class="img-thumbnail" alt="">
+                           <div class="banner-right-icon">
+                               <a href="/Urun/UrunDetay/@urun.urunId?==urunId"> <h4 class="pt-3"><b style="font-size:25px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"><i>@urun.urunAd </i></b></h4></a>
+                           </div>
+                       </div>
+                   }
+                   <div class="toys-grids-upper" style="margin-top:50px">
+                       <div class="about-toys-off">
+                           <h2>Seçili Ürünlerde <span>70% </span>Kadar İndirim</h2>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </section>
+
+       <section class="about py-lg-4 py-md-3 py-sm-3 py-3" id="about">
+           <div class="container py-lg-5 py-md-5 py-sm-4 py-4">
+               <h3 class="title text-center mb-lg-5 mb-md-4  mb-sm-4 mb-3">MARKALARIMIZ</h3>
+               <div class="row banner-below-w3l" style="margin-left:15px">
+
+                   <div class="outs_more-buttn">
+                      
+                       <ul>
+                           @foreach (var item in Model.marka)
+                           {
+
+                           <li style="display:inline-block; margin-left:10px">
+                               <div class="agileinfo_port_grid" >
+                                 <a href="/Urun/MarkaAra/@item.markaId?==markaId" class="">  <img src="~/Content/Resimler/Kullanici/@item.markaResim" alt=" " class="img-fluid" style="height:55px; width:55px;" /> </a>
+                                   
+                                  
+                               </div>
+
+                           </li>
+
+                           }
+                       </ul>
+                   </div>
+                  
+
+               </div>
+           </div>
+       </section>
+
+       <!-- //about -->
+       <!--new Arrivals -->
+       <section class="blog py-lg-4 py-md-3 py-sm-3 py-3">
+           <div class="container py-lg-5 py-md-4 py-sm-4 py-3 ">
+               <h3 class="title clr text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">Alt Kategoriler</h3>
+               <div class="slid-img">
+                   <ul id="flexiselDemo1">
+                       @foreach (var item in (List<AltKategori>)ViewBag.AltKategoriler)
+                       {
+                           <li style="margin-top:6px">
+                               <div class="agileinfo_port_grid">
+                                   <img src="~/Content/Resimler/Kullanici/@item.altKategoriResim" alt=" " class="img-fluid" style="height:85px;" />
+                                   <div class="banner-right-icon">
+                                       <h4 class="pt-3">@item.altKategoriAd</h4>
+                                   </div>
+                                   <div class="outs_more-buttn">
+                                       <a href="/AltKategori/Index/@item.altKategoriId?==altkategoriId">Şimdi Al</a>
+                                       @*<a href="/Urun/@item.altKategoriAd.Trim().Replace(" ",String.Empty)">Şimdi Al</a>*@
+                                   </div>
+                               </div>
+                           </li>
+                       }
+                   </ul>
+               </div>
+           </div>
+       </section>
+       <!--//about -->
+       <!--Customers Review -->
+       <section class="clients py-lg-4 py-md-3 py-sm-3 py-3" id="clients">
+           <div class="container py-lg-5 py-md-5 py-sm-4 py-3">
+               <h3 class="title clr text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">Tatlış Yorumlar</h3>
+               <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                  
+                   <div class="carousel-inner">
+                      
+                           <div class="carousel-item active">
+                               <div class="row">
+                                   @foreach (var cocuk in Model.cocuk)
+
+                                   {
+                                       <div class="col-lg-6 clients-w3layouts-row">
+                                           <div class="least-w3layouts-text-gap">
+
+                                               <div class="row">
+                                                   <div class="col-md-4 col-sm-4 news-img">
+                                                       <img src="~/Content/Resimler/Kullanici/@cocuk.cocukFoto" width="50" height="50" class="image-fluid">
+                                                   </div>
+                                                   <div class="col-md-8 col-sm-8 clients-says-w3layouts">
+                                                       <h4>
+                                                           @cocuk.cocukAd @cocuk.cocukSoyad
+                                                       </h4>
+                                                       <span class="mt-2">@cocuk.CocukRutbe.cocukRutbeAd</span>
+                                                   </div>
+                                                   <div class="mt-3 news-agile-text">
+                                                       <img src="~/Content/Tema/web/images/tt1.jpg" alt="" class="image-fluid">
+                                                       <p class="mt-3">
+                                                           <span class="fas fa-quote-left"></span>
+                                                           @cocuk.cocukYorum1
+
+                                                           <span class="fas fa-quote-right"></span>
+                                                       </p>
+                                                   </div>
+
+                                               </div>
+
+                                           </div>
+                                       </div>
+                                   }
+                                   </div>
+                           </div>
+                       
+                       <div class="outs_more-buttn">
+
+                       </div>
+                   </div>
+                       <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                           <span class="sr-only">Önceki</span>
+                       </a>
+                       <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                           <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                           <span class="sr-only">İleri</span>
+                       </a>
+                   </div>
+
+
+           </div>
+           <div class="outs_more-buttn" style=" text-align:center">
+               <p><b style="font-size:30px; color:wheat"> Sizde tatlış yorumlar yapmak istiyorsanız tıklayın...</b></p>
+               <a href="/Home/YorumGonder">Tıkla</a>
+           </div>
+       </section>
+       <!--//Customers Review -->
+       <!-- Product-view -->
+       <section class="product py-lg-4 py-md-3 py-sm-3 py-3">
+           <div class="container py-lg-5 py-md-5 py-sm-4 py-3">
+               <h3 class="title text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">BUNLARA DA BAKIN...</h3>
+               <div class="row banner-below-w3l">
+                   @foreach (var urun in (List<Urun>) ViewBag.Urunler)
+                   {
+                       <div class="col-lg-4 col-md-6 col-sm-6 text-center banner-agile-flowers">
+                           <img src="~/Content/Resimler/Kullanici/@urun.urunTekResim" class="img-thumbnail" alt="">
+                           <div class="banner-right-icon">
+                               <a href="/Urun/UrunDetay/@urun.urunId?==urunid"> <h4 class="pt-3"><b style="font-size:25px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"><i>@urun.urunAd </i></b></h4></a>
+                           </div>
+                       </div>
+                   }
+                   </div>
+           </div>
+       </section>
+       <!--//Product-view-->
+       <!--//Product-view-->
+       <section class="service py-lg-4 py-md-3 py-sm-3 py-3">
+           <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+               <h3 class="title text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">SERVİSLERİMİZ</h3>
+               <div class="row text-center">
+                   <div class="col-lg-4 col-md-6 abut-gride">
+                       <span class="fas fa-truck"></span>
+                       <h5>Hızlı Kargo</h5>
+                       <p class="mt-3">
+                           En Kaliteli ve En hızli kargo firmalarıyla çalışıp size ürününüzü bir an önce ulaştırırız...
+                       </p>
+                   </div>
+                   <div class="col-lg-4 col-md-6 abut-gride">
+                       <span class="fas fa-phone-volume"></span>
+                       <h5>Destek</h5>
+                       <p class="mt-3">
+                           İletişime posta veya telefon yoluyla geçmek bir tık uzağınızda...
+                       </p>
+                   </div>
+                   <div class="col-lg-4 col-md-6 abut-gride">
+                       <span class="fas fa-undo"></span>
+                       <h5> Geri Dönüş</h5>
+                       <p class="mt-3">
+
+                           Her an Telefon ve Posta yoluyla ulaşabilirsiniz.
+                       </p>
+                   </div>
+                   <div class="col-lg-4 col-md-6 mt-lg-4 mt-3 abut-gride">
+                       <span class="fas fa-money-bill-alt"></span>
+                       <h5>Online Ödeme</h5>
+                       <p class="mt-3">
+                           İstediğiniz Kredi Kartı ve türlü yöntemlerle hiçbir uğraş vermeden ödeme yapabilirsiniz.
+                       </p>
+                   </div>
+                   <div class="col-lg-4 col-md-6 mt-lg-4 mt-3 abut-gride">
+                       <span class="fas fa-exchange-alt"></span>
+                       <h5>Hızlı İade</h5>
+                       <p class="mt-3">
+                           Her türlü kargo veyahut hatalı ürün iadelerinde sorgu sual yok.
+                       </p>
+                   </div>
+                   <div class="col-lg-4 col-md-6 mt-lg-4 mt-3 abut-gride">
+                       <span class="fas fa-thumbs-up"></span>
+                       <h5>Kalite</h5>
+                       <p class="mt-3">
+                           En kaliteli markalarla çalışmamızın ürünü olarak en kaliteli ürünler hizmetinizde.
+                       </p>
+                   </div>
+               </div>
+           </div>
+       </section>
+       <!--Product-about-->
+       <section class="about py-lg-4 py-md-3 py-sm-3 py-3">
+           <div class="container py-lg-5 py-md-5 py-sm-4 py-3">
+               <h3 class="title text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">Kısa Bir Biz</h3>
+               <div class="about-products-w3layouts">
+                   <p>
+                       Gelişen ve çeşitlenen dünyada her an yeni oyuncak çeşit ve türleri çıkmaktadır. Buna karşılık olarak EgoToys'un ilk amacı bu yenilikleri en uygun şekilde takip etmektir.
+                   </p>
+                   <p class="my-lg-4 my-md-3 my-3">
+                       1789 da sanayinin ilk mekanik ve makineşlemesi adımıyla birlikte ana kurucumuz sayın Engin Uğurlu ilk adımları atarak günümüze uzanan engin bir selin damlalarını oluşturdu.
+                   </p>
+                   <p>
+                       Hedefimiz istikrarımızı sürdürerek maksimum kaliteyle halk arasındaki iletişimimizi tutarak yolumuza devam etmek olacaktır...
+                   </p>
+               </div>
+           </div>
+       </section>
+       <section class="subscribe">
+           <div class="container-fluid">
+               <div class="row">
+                   <div class="col-lg-6 col-md-6 map-info-right px-0">
+                       <iframe width="100" height="455" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3015.0778009150813!2d31.14485031586296!3d40.914039979310566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x409da13f268b673d%3A0x82ffe8c18019050!2sD%C3%BCzce+Teknopark!5e0!3m2!1str!2str!4v1516274702909" frameborder="0" allowfullscreen="" style="border:0"></iframe>
+                   </div>
+                   <div class="col-lg-6 col-md-6 address-w3l-right text-center">
+                       <div class="address-gried ">
+                           <span class="far fa-map"></span>
+                           <p>Orhan Gazi Mahallesi Beçi Melen<br>Türkiye/Düzce
+                           <p>
+                       </div>
+                       <div class="address-gried mt-3">
+                           <span class="fas fa-phone-volume"></span>
+                           <p> +(538) 205 64 61 <br>+(212) 235 99 37</p>
+                       </div>
+                       <div class=" address-gried mt-3">
+                           <span class="far fa-envelope"></span>
+                           <p>
+                               <a href="mailto:info@example.com">ugurlu.gurkan96@gmail.com</a>
+                               <br><a href="mailto:info@example.com">egotoys@gmail.com</a>
+                           </p>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </section>
+      
+       
+      
+      
+   </body>
+
+</html>

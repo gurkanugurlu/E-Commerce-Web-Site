@@ -1,0 +1,58 @@
+﻿@using ETicaret.Models
+@using ETicaret.Settings
+@model  List<Abone>
+@{
+    ViewBag.Title = "Abone";
+    Layout = "~/Views/Shared/_LayoutYonetici.cshtml";
+}
+
+<div class="card">
+
+    <div class="card-header">
+        <h3 class="card-title"><b>Aboneler</b> &nbsp;(@ViewBag.Aboneler tane abone bulundu...) </h3>
+
+        
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0" style="display: block;">
+       
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th><img src="~/Content/Resimler/Kullanici/countdown.png" />Abone Id</th>
+                    <th><img src="~/Content/Resimler/Kullanici/mail.png" />Abone Mail</th>
+                    <th><img src="~/Content/Resimler/Kullanici/calendar.png" />Abone Tarih</th>
+                    
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var abone in Model)
+                {
+                    <tr>
+                        <td>@abone.aboneId</td>
+                        <td>@abone.aboneMail</td>
+                        <td>@abone.aboneTarih</td>
+                        
+
+
+                       
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+    </div>
+    <script src="~/Content/Tema1/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/Tema1/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/Tema1/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/Tema1/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <!-- SlimScroll -->
+    <script src="~/Content/Tema1/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <!-- /.card-body -->
+</div>

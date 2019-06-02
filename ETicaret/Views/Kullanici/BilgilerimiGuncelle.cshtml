@@ -1,0 +1,132 @@
+﻿@using ETicaret.Models
+@using ETicaret.Settings
+@model Kullanici
+@{
+    ViewBag.Title = "BilgilerimiGuncelle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Partial("resimDiv")
+<body class="hold-transition sidebar-mini">
+
+    <div class="wrapper">
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            
+               
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        
+                        <!-- /.col -->
+                        <div class="col-md-9">
+                            <div class="card">
+                                <div class="card-header p-2">
+                                    <ul class="nav nav-pills">
+                                       
+                                        <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Kullanıcı Bilgilerimi Güncelle</a></li>
+                                    </ul>
+                                </div><!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="tab-content">
+                                        <div class="active tab-pane" id="activity">
+                                           
+                                            <!-- /.post -->
+                                            <!-- Post -->
+                                            <!-- /.post -->
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                        <div class="tab-pane" id="timeline">
+                                            <!-- The timeline -->
+                                            <ul class="timeline timeline-inverse">
+                                                <!-- timeline time label -->
+                                               
+                                                <!-- /.timeline-label -->
+                                                <!-- timeline item -->
+                                               
+                                                <!-- END timeline item -->
+                                                <li>
+                                                    <i class="fa fa-clock-o bg-gray"></i>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                        <div class="tab-pane" id="settings">
+                                            @using (Html.BeginForm("BilgilerimiGuncelle", "Kullanici", FormMethod.Post))
+                                            {
+                                                <div class="form-group">
+                                                    <label for="inputName" class="col-sm-2 control-label">Adiniz</label>
+                                                    <div class="col-sm-10">
+                                                        @Html.TextBoxFor(x => x.kullaniciAd, new { @class = "form-control", placeholder = "Ad giriniz" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputName" class="col-sm-2 control-label">Soyadıniz.</label>
+                                                    <div class="col-sm-10">
+                                                        @Html.TextBoxFor(x => x.kullaniciSoyad, new { @class = "form-control", placeholder = "Soyad giriniz" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputEmail" class="col-sm-2 control-label">Emailiniz</label>
+                                                    <div class="col-sm-10">
+                                                        @Html.TextBoxFor(x => x.kullaniciMail, new { @class = "form-control", placeholder = "Eposta giriniz" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputName2" class="col-sm-2 control-label">Telefonunuz</label>
+                                                    <div class="col-sm-10">
+                                                        @Html.TextBoxFor(x => x.kullaniciTelefon, new { @class = "form-control", placeholder = "Telefon giriniz" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputExperience" class="col-sm-2 control-label">Adres</label>
+                                                    <div class="col-sm-10">
+                                                        @Html.TextAreaFor(x => x.kullaniciAdres, new { @class = "form-control", placeholder = "Adresinizi giriniz" })
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input type="checkbox"> Şartlar ve koşulları kabul ediyorum
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <button type="submit" class="btn btn-info">Kaydet</button>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div><!-- /.card-body -->
+                            </div>
+                            <!-- /.nav-tabs-custom -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </section>
+
+
+
+        </div>
+
+
+
+    </div>
+    <script src="~/Content/Tema1/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/Tema1/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- FastClick -->
+    <script src="~/Content/Tema1/plugins/fastclick/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/Tema1/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/Content/Tema1/dist/js/demo.js"></script>
+</body>

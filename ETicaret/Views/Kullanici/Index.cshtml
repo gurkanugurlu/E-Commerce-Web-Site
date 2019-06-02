@@ -1,0 +1,291 @@
+﻿@using ETicaret.Models
+@using ETicaret.Settings
+@model Kullanici
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+@Html.Partial("resimDiv")
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 3 | User Profile</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+       body a {
+            color:antiquewhite
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+    @if (TempData["PDuzenle"] != null)
+    {
+        <div class="alert alert-info alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h5><i class="icon fa fa-info"></i> Başarılı!</h5>
+            @TempData["PDuzenle"]
+        </div>
+    }
+    <div class="wrapper">
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Profiliniz</h1>
+                        </div>
+
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <!-- Profile Image -->
+                            <div class="card card-primary card-outline">
+                                <div class="card-body box-profile">
+                                    <div class="text-center">
+                                        <img class="profile-user-img img-fluid img-circle"
+                                             src="~/Content/Resimler/Kullanici/@Model.kullaniciResim"
+                                             alt="User profile picture">
+                                    </div>
+                                    <h3 class="profile-username text-center">@Model.kullaniciAd @Model.kullaniciSoyad</h3>
+                                    <p class="text-muted text-center">@Model.Yetki.yetkiAd (@Model.kullaniciKayitTarih.ToString().Substring(0, 10))</p>
+                                    <ul class="list-group list-group-unbordered mb-3">
+                                        <li class="list-group-item">
+                                            <b>Yapılan Toplam Sipariş Sayısı</b> <a class="float-right">@ViewBag.Sayi</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Yapılan Toplam Yorum Sayısı</b> <a class="float-right">@ViewBag.YSayi</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Toplam Ürünlere Verilen Puan Sayisi</b> <a class="float-right">@ViewBag.PSayi</a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                            <!-- About Me Box -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Hakkımda</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <strong><i class="fa fa-book mr-1"></i> Telefonum</strong>
+                                    <p class="text-muted">
+                                        @Model.kullaniciTelefon
+                                    </p>
+                                    <hr>
+                                    <strong><i class="fa fa-map-marker mr-1"></i> Cinsiyetiniz </strong>
+
+                                    @if (Model.kullaniciCinsiyet == false)
+                                    {
+                                        <p class="text-muted">Erkek </p>
+                                    }
+                                    else
+                                    {
+                                        <p class="text-muted">Kadın </p>
+                                    }
+
+
+                                    <hr>
+                                    <strong><i class="fa fa-book mr-1"></i> Adres</strong>
+                                    <p class="text-muted">
+                                        @Model.kullaniciAdres
+                                    </p>
+                                    <hr>
+
+                                    <strong><i class="fa fa-file-text-o mr-1"></i> Detay</strong>
+                                    @if (Model.KullaniciDetay == null)
+                                    {
+                                        <p class="text-muted">
+                                            Herhangi bir kullanıcı detay bilgisi eklenmemiştir.
+
+                                        </p>
+                                    }
+                                    else
+                                    {
+                                        <p class="text-muted">
+                                            @if (Model.KullaniciDetay.Sehirler.sehirAd != null)
+                                            {
+                                                <b>Kullanici Sehir Bilgisi:</b>@Model.KullaniciDetay.Sehirler.sehirAd
+                                            }
+                                            else
+                                            {
+                                                <b>Kullanici Sehir Bilgisi Bulunamadı</b>
+                                            }
+                                            @if (Model.KullaniciDetay.Ulkeler.ulkeAd != null)
+                                            {
+                                                <b>Kullanici Ulke Bilgisi:</b>@Model.KullaniciDetay.Ulkeler.ulkeAd
+                                            }
+                                            else
+                                            {
+                                                <b>Kullanici Sehir Bilgisi Bulunamadı</b>
+
+                                            }
+
+
+
+                                        </p>
+                                    }
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <a href="/Kullanici/BilgilerimiGuncelle/@Model.kullaniciId?==kullaniciId" class="btn btn-primary btn-block" style="width:250px"><b>Bilgilerimi Güncelle</b></a>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-9">
+                            <div class="card">
+                                <div class="card-header p-2">
+                                    <ul class="nav nav-pills">
+                                        <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Yorumlar</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Zaman Çizgisi</a></li>
+                                        
+                                    </ul>
+                                </div><!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="tab-content">
+                                        <div class="active tab-pane" id="activity">
+                                            <!-- Post -->
+                                            @foreach (var item in (List<Yorum>)ViewBag.Yorum)
+                                            {
+                                                <div class="post">
+
+                                                    <div class="user-block">
+                                                        <img class="img-circle img-bordered-sm" src="~/Content/Resimler/Kullanici/@item.Urun.urunTekResim" alt="user image">
+                                                        <span class="username" style="visibility:visible; backface-visibility:visible; color:red">
+                                                            <a href="/Urun/UrunDetay/@item.Urun.urunId">@item.Urun.urunAd</a>
+                                                            <a href="#" class="float-right btn-tool"><i class="fa fa-times"></i></a>
+                                                        </span>
+                                                        <span class="description">Yorum Tarih: @item.yorumTarih</span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                        @item.yorumIcerik
+                                                    </p>
+
+
+                                                </div>
+                                            }
+                                            <!-- /.post -->
+                                            <!-- Post -->
+                                            <!-- /.post -->
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                        <div class="tab-pane" id="timeline">
+                                            <!-- The timeline -->
+                                            <ul class="timeline timeline-inverse">
+                                                <!-- timeline time label -->
+                                                <li class="time-label">
+                                                    <span class="bg-danger">
+                                                        İlk Siparişiniz: @ViewBag.İlkSiparis
+                                                    </span>
+                                                </li>
+                                                <!-- /.timeline-label -->
+                                                <!-- timeline item -->
+                                                <li>
+                                                    <i class="fa fa-envelope bg-primary"></i>
+                                                    <div class="timeline-item">
+
+                                                        <div class="timeline-body">
+                                                            İlk Siparişiniz başarımı açıldı.
+                                                        </div>
+
+                                                    </div>
+                                                </li>
+                                                <!-- END timeline item -->
+                                                <!-- timeline item -->
+                                                <!-- END timeline item -->
+                                                <!-- timeline item -->
+                                                <li class="time-label">
+                                                    <span class="bg-warning">
+                                                        İlk Yorumunuz: @ViewBag.İlkYorum
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <i class="fa fa-comments bg-warning"></i>
+                                                    <div class="timeline-item">
+
+
+                                                        <div class="timeline-body">
+                                                            İlk yorumunuz başarımı açıldı.
+                                                        </div>
+
+                                                    </div>
+                                                </li>
+                                                <!-- END timeline item -->
+                                                <!-- timeline time label -->
+                                                <li class="time-label">
+                                                    <span class="bg-success">
+                                                        Kayıt Tarihiniz:  @Model.kullaniciKayitTarih.ToString().Substring(0, 10)
+                                                    </span>
+                                                </li>
+                                                <!-- /.timeline-label -->
+                                                <!-- timeline item -->
+                                                <li>
+                                                    <i class="fa fa-camera bg-purple"></i>
+                                                    <div class="timeline-item">
+
+                                                        <h3 class="timeline-header"><a href="#"></a> İlk Adımlarınız...</h3>
+                                                        <div class="timeline-body">
+                                                            <b>Hoşgeldiniz...</b>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- END timeline item -->
+                                                <li>
+                                                    <i class="fa fa-clock-o bg-gray"></i>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                        
+                                        <!-- /.tab-pane -->
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div><!-- /.card-body -->
+                            </div>
+                            <!-- /.nav-tabs-custom -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </section>
+
+
+
+        </div>
+
+
+
+    </div>
+    <script src="~/Content/Tema1/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/Tema1/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- FastClick -->
+    <script src="~/Content/Tema1/plugins/fastclick/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/Tema1/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/Content/Tema1/dist/js/demo.js"></script>
+</body>
+</html>

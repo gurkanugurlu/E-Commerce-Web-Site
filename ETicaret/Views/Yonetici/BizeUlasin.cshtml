@@ -1,0 +1,61 @@
+﻿@using ETicaret.Models
+@using ETicaret.Settings
+@model  List<BizeUlasin>
+@{
+    ViewBag.Title = "BizeUlasın";
+    Layout = "~/Views/Shared/_LayoutYonetici.cshtml";
+}
+<div class="card">
+
+    <div class="card-header">
+        <h3 class="card-title"><b> Bize Ulaşın Mesajları</b>&nbsp;  (@ViewBag.BizeUlasin tane mesaj bulundu...) </h3>
+
+
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0" style="display: block;">
+
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th><img src="~/Content/Resimler/Kullanici/countdown.png" />Mesaj Id</th>
+                    <th><img src="~/Content/Resimler/Kullanici/users.png" />Kişi Ad</th>
+                    <th><img src="~/Content/Resimler/Kullanici/envelope.png" />Mesaj İçerik</th>
+                    <th><img src="~/Content/Resimler/Kullanici/mail.png" />Kişi Mail </th>
+                    <th><img src="~/Content/Resimler/Kullanici/mobilephone.png" />Kişi Telefon</th>
+                    <th><img src="~/Content/Resimler/Kullanici/calendar.png" />Mesaj Tarih</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var mesaj  in Model)
+                {
+                    <tr>
+                        <td>@mesaj.mesajId</td>
+                        <td>@mesaj.mesajAd</td>
+                        <td>@mesaj.mesajDetay</td>
+                        <td>@mesaj.mesajEmail</td>
+                        <td>@mesaj.mesajTelefon</td>
+                        <td>@mesaj.mesajTarih</td>
+
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+    </div>
+    <script src="~/Content/Tema1/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/Tema1/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/Tema1/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/Tema1/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <!-- SlimScroll -->
+    <script src="~/Content/Tema1/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <!-- /.card-body -->
+</div>
+
+
+

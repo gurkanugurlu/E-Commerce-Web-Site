@@ -1,0 +1,88 @@
+﻿@using ETicaret.Models
+
+@model List<Marka>
+@{
+    ViewBag.Title = "Marka";
+    Layout = "~/Views/Shared/_LayoutYonetici.cshtml";
+}
+
+<div class="card">
+
+    <div class="card-header">
+        <h3 class="card-title"><b>Alt Kategoriler</b>&nbsp;(@Model.Count tane marka bulundu...)</h3>
+
+        <div class="card-tools">
+            <a href="/Yonetici/MarkaEkle" class="btn btn-info btn-sm">
+                <i class="fa fa-plus-square-o"></i> Yeni Marka Ekle
+            </a>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0" style="display: block;">
+        @if (TempData["MEkle"] != null)
+        {
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fa fa-check"></i> Başarılı!</h5>
+                @TempData["MEkle"]
+            </div>
+        }
+        @if (TempData["MDuzenle"] != null)
+        {
+            <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fa fa-info"></i> Başarılı!</h5>
+                @TempData["MDuzenle"]
+            </div>
+        }
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th> <img src="~/Content/Resimler/Kullanici/camera.png" />Resim</th>
+                    <th> <img src="~/Content/Resimler/Kullanici/countdown.png" />Id</th>
+                    <th><img src="~/Content/Resimler/Kullanici/users.png" />Ad</th>
+                    <th><img src="~/Content/Resimler/Kullanici/mail.png" />Tanım</th>
+                    <th><img src="~/Content/Resimler/Kullanici/negotiation.png" />İşlemler</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var marka in Model)
+                {
+                    <tr>
+                        <td style="width:40px;text-align:center;">
+                            <img src="~/Content/Resimler/Kullanici/@marka.markaResim" style="width:30px;" />
+                        </td>
+                        <td>@marka.markaId</td>
+                        <td>@marka.markaAd</td>
+                        <td>@marka.markaTanim</td>
+
+
+                        <td>
+                            <a title="Düzenle" class="btn btn-primary" href="/Yonetici/MarkaDuzenle/@marka.markaId?==markaId">
+                                <i class="fa fa-edit"></i>
+                            </a>
+
+                            <a title="Detay" class="btn btn-warning" href="/Yonetici/MarkalarGör/@marka.markaId?==markaId">
+                                <i class="fa fa-question-circle-o"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+    </div>
+    <script src="~/Content/Tema1/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/Tema1/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/Tema1/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/Tema1/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <!-- SlimScroll -->
+    <script src="~/Content/Tema1/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <!-- /.card-body -->
+</div>

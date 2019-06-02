@@ -1,0 +1,197 @@
+﻿@using ETicaret.Models;
+@model List<Urun>
+
+
+@{
+    ViewBag.Title = "Urunler";
+    Layout = "~/Views/Shared/_LayoutYonetici.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title"><b> Ürünler </b> (@Model.Count tane ürün bulundu.)</h3>
+
+        <div class="card-tools">
+            <a href="/Yonetici/UrunEkle" class="btn btn-info btn-sm">
+                <i class="fa fa-plus-square-o"></i> Yeni Urun Ekle
+            </a>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0" style="display: block;">
+        @if (TempData["UEkle"] != null)
+        {
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fa fa-check"></i> Başarılı!</h5>
+                @TempData["UEkle"]
+            </div>
+        }
+        @if (TempData["UDuzenle"] != null)
+        {
+            <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fa fa-info"></i> Başarılı!</h5>
+                @TempData["UDuzenle"]
+            </div>
+        }
+        @if (TempData["USil"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fa fa-ban"></i> Başarılı!</h5>
+                @TempData["USil"]
+            </div>
+        }
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th><img src="~/Content/Resimler/Kullanici/camera.png" width="16" height="16" />Resim</th>
+                    <th><img src="~/Content/Resimler/Kullanici/countdown.png" height="16" width="16" />Id</th>
+                    <th><img src="~/Content/Resimler/Kullanici/id.png" height="16" width="16" />Ad</th>
+                    <th><img src="~/Content/Resimler/Kullanici/rss.png" height="16" width="16" />Marka</th>
+                    <th><img src="~/Content/Resimler/Kullanici/calendar.png" height="16" width="16" />Eklenme Tarihi</th>
+                    <th><img src="~/Content/Resimler/Kullanici/diagram.png" height="16" width="16" />Urun Yaş</th>
+                    <th><img src="~/Content/Resimler/Kullanici/warehouse.png" height="16" width="16" />Stok Sayisi</th>
+                    <th><img src="~/Content/Resimler/Kullanici/earnings.png" height="16" width="16" />Aktiflik</th>
+                    <th><img src="~/Content/Resimler/Kullanici/star.png" height="16" width="16" />Boyut</th>
+                    <th><img src="~/Content/Resimler/Kullanici/palet.png" height="16" width="16" />Renk</th>
+                    <th><img src="~/Content/Resimler/Kullanici/backend.png" height="16" width="16" />AltKategorisi</th>
+                    <th><img src="~/Content/Resimler/Kullanici/mail.png" height="16" width="16" />Tanim</th>
+                    <th><img src="~/Content/Resimler/Kullanici/envelope.png" height="16" width="16" />Kampanya</th>
+                    <th><img src="~/Content/Resimler/Kullanici/budget2.png" height="16" width="16" />Fiyat</th>
+                    <th><img src="~/Content/Resimler/Kullanici/review.png" height="16" width="16" />Puan</th>
+                    <th><img src="~/Content/Resimler/Kullanici/negotiation.png" width="16" height="16" />İşlemler</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var urun in Model)
+                {
+                <tr>
+                    <td style="width:40px;text-align:center;">
+                        <img src="~/Content/Resimler/Kullanici/@urun.urunTekResim" style="width:30px;" />
+                    </td>
+                    <td>@urun.urunId</td>
+                    <td>@urun.urunAd</td>
+
+                    <td>@urun.Marka.markaAd</td>
+                    <td>@urun.urunEklenmeTarih</td>
+                    <td>@urun.urunYas</td>
+                    <td>@urun.urunStokSayisi</td>
+
+                    @if (urun.urunAktifMi == true)
+                    {
+                        <td>Evet</td>
+                    }
+                    @if (urun.urunAktifMi != true)
+                    {
+                        <td>Hayır</td>
+                    }
+
+                    <td>@urun.urunBoyut</td>
+                    <td>@urun.urunRenk</td>
+                    <td>@urun.AltKategori.altKategoriAd</td>
+                    <td>@urun.urunTanim</td>
+                   
+                    @if (urun.urunKampanyaVarMı == null)
+                    {
+                        <td>Hayır</td>
+                    }
+                    else
+                    {
+                        if (urun.urunKampanyaVarMı == true)
+                        {
+                         <td>Evet</td>
+                        }
+                        else if (urun.urunKampanyaVarMı == false)
+                        {
+                         <td>Hayır</td>
+                        }
+                    }
+
+
+
+
+
+                    <td><span class="badge badge-info">@urun.urunFiyat.00 TL</span></td>
+                    
+                   
+                    @try
+                    {
+                        foreach (var puan in (Dictionary<int, int>)ViewBag.UrunPuan)
+                        {
+
+                            if (puan.Key == urun.urunId)
+                            {
+                                <td>@puan.Value</td>
+                            }
+                            else
+                            {
+
+                            }
+
+                        }
+
+
+                    }
+
+                    catch (Exception ex)
+                    {
+
+                        <td>@ex.Message="hata"</td>
+
+                    }
+
+
+
+
+                    @* @try
+        { foreach(var puan in (List<Puan>)ViewBag.UrunPuan)
+            {
+
+                if (puan.urunId == urun.urunId)
+                {
+                 <td>@puan.puan1</td>
+             }
+             else
+             {
+                 <td>Puanı Yoktur</td>
+                }
+            }
+
+
+        }
+        catch (Exception ex)
+        {
+
+            <td>@ex.Message="hata"</td>
+
+        }*@
+
+
+
+
+                    <td>
+                        <a title="Düzenle" class="btn btn-primary" href="/Yonetici/UrunDuzenle/@urun.urunId?==urunId">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a onclick="return confirm('Silmek istediğinizden emin misiniz ?')" title="Sil" class="btn btn-danger" href="/Yonetici/UrunSil/@urun.urunId?==urunId">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                        <a title="Detay" class="btn btn-warning" href="/Yonetici/SiparisDetayGor/@urun.urunId?==urunId">
+                            <i class="fa fa-question-circle-o"></i>
+                        </a>
+                    </td>
+                </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+    </div>
+    <!-- /.card-body -->
+</div>

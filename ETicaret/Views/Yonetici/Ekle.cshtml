@@ -1,0 +1,103 @@
+﻿
+
+@using ETicaret.Models;
+
+@model  Kullanici
+
+
+@{
+    ViewBag.Title = "Ekle";
+    Layout = "~/Views/Shared/_LayoutYonetici.cshtml";
+}
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">Kullanıcı Ekle</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    @using (Html.BeginForm("Ekle", "Yonetici", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+    <div class="card-body">
+
+        @if (ViewData["Hata"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                <h5><i class="icon fa fa-ban"></i> Dikkat!</h5>
+                @ViewData["Hata"]
+            </div>
+        }
+
+        @Html.ValidationSummary()
+
+        <div class="form-group">
+            <label>Ad</label>
+            @Html.TextBoxFor(x => x.kullaniciAd, new { @class = "form-control", placeholder = "Ad giriniz" })
+            @*@Html.ValidationMessageFor(x=> x.ad)*@
+        </div>
+
+        <div class="form-group">
+            <label>Soyad</label>
+            @Html.TextBoxFor(x => x.kullaniciSoyad, new { @class = "form-control", placeholder = "Soyad giriniz" })
+            @*@Html.ValidationMessageFor(x => x.soyad)*@
+        </div>
+
+        <div class="form-group">
+            <label>Eposta</label>
+            @Html.TextBoxFor(x => x.kullaniciMail, new { @class = "form-control", placeholder = "Eposta giriniz" })
+            @Html.ValidationMessageFor(x => x.kullaniciMail)
+        </div>
+
+        <div class="form-group">
+            <label>Şifre</label>
+            @Html.PasswordFor(x => x.kullaniciSifre, new { @class = "form-control", placeholder = "Şifrenizi Giriniz" })
+            @Html.ValidationMessageFor(x => x.kullaniciSifre)
+        </div>
+        <div class="form-group">
+            <label>Telefon</label>
+            @Html.TextBoxFor(x => x.kullaniciTelefon, new { @class = "form-control", placeholder = "Telefon giriniz" })
+
+        </div>
+
+        <div class="form-group">
+            <label>SehirAd</label>
+            @Html.DropDownListFor(x=> x.KullaniciDetay.sehirId, (SelectList)ViewBag.Sehirler, "Seçiniz", new { @class = "form-control" })
+           
+        </div>
+        <div class="form-group">
+            <label>Adres</label>
+            @Html.TextBoxFor(x => x.kullaniciAdres, new { @class = "form-control", placeholder = "Adresinizi giriniz" })
+
+        </div>
+        <div class="form-group">
+            <label>Cinsiyetiniz(Belirmeyebilirsiniz)</label>
+            @Html.TextBoxFor(x => x.kullaniciCinsiyet, new { @class = "form-control", placeholder = "Cinsiyetinizi giriniz" })
+
+        </div>
+        @*<div class="form-group">
+            <label>Adres</label>
+            @Html.TextBoxFor(x => , new { @class = "form-control", placeholder = "Ad giriniz" })
+            @
+        </div>*@
+
+        <div class="form-group">
+            <label>Yetkiler</label>
+            @Html.DropDownList("yetkiId", (SelectList)ViewBag.Yetkiler, "Seçiniz...", new { @class = "form-control" })
+        </div>
+        @*<div class="form-group">
+            <label>Şehir</label>
+            @Html.DropDownListFor(x=> x.KullaniciDetay.sehirId, (SelectList)ViewBag.Sehirler, "Seçiniz...", new { @class = "form-control" })
+        </div>*@
+
+        <div class="form-group">
+            <label>Resim</label>
+            <input type="file" name="resimGelen" class="form-control" placeholder="Resim giriniz">
+        </div>
+    </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </div>
+    }
+</div>

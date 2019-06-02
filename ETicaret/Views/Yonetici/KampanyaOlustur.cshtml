@@ -1,0 +1,65 @@
+﻿@using ETicaret.Models
+@model Kampanya
+@{
+    ViewBag.Title = "KampanyaOlustur";
+    Layout = "~/Views/Shared/_LayoutYonetici.cshtml";
+    
+}
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">Kampanya Olustur</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    @using (Html.BeginForm("KampanyaOlustur", "Yonetici", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+    <div class="card-body">
+
+        @if (ViewData["Hata"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                <h5><i class="icon fa fa-ban"></i> Dikkat!</h5>
+                @ViewData["Hata"]
+            </div>
+        }
+
+        @Html.ValidationSummary()
+
+        @if (ViewBag.Deger == 1)
+        {
+            <div class="form-group">
+                <label>Kategori Tipleri</label>
+                @Html.DropDownList("kategoriId", (SelectList)ViewBag.Sonuc, "Seçiniz...", new { @class = "form-control" })
+            </div>
+        }
+        @if (ViewBag.Deger == 2)
+        {
+            <div class="form-group">
+                <label>AltKategori Tipleri </label>
+                @Html.DropDownList("altKategoriId", (SelectList)ViewBag.Sonuc, "Seçiniz...", new { @class = "form-control" })
+            </div>
+        }
+        @if (ViewBag.Deger == 3)
+        {
+            <div class="form-group">
+                <label>Marka Tipleri</label>
+                @Html.DropDownList("markaId", (SelectList)ViewBag.Sonuc, "Seçiniz...", new { @class = "form-control" })
+            </div>
+        }
+
+
+
+        <div class="form-group">
+            <label>Kampanya İndirim Oranı(Yüzdesel)  </label>
+            @Html.TextBoxFor(x => x.kampanyaIndirimOran, new { @class = "form-control", placeholder = "Kampanya İndirim Oranını Giriniz" })
+            @*@Html.ValidationMessageFor(x => x.soyad)*@
+        </div>
+    </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </div>
+    }
+</div>

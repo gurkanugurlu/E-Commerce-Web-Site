@@ -1,0 +1,288 @@
+﻿@using ETicaret.Models
+
+@model Sepet
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        Kullanici k = ViewBag.Kullanici;
+
+    }
+
+
+    @Html.Partial("resimDiv")
+
+    <!DOCTYPE html>
+    <html lang="zxx">
+    <head>
+        <title>Toys Shop an Ecommerce Category Bootstrap Responsive Web Template | Home :: w3layouts</title>
+        <!--meta tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="keywords" content="Toys Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+        <script>
+         addEventListener("load", function () {
+         	setTimeout(hideURLbar, 0);
+         }, false);
+
+         function hideURLbar() {
+         	window.scrollTo(0, 1);
+         }
+        </script>
+        <!--//meta tags ends here-->
+        <!--booststrap-->
+        
+        <link href="~/Content/Tema/web/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
+        <!--//booststrap end-->
+        <!-- font-awesome icons -->
+        <link href="~/Content/Tema/web/css/fontawesome-all.min.css" rel="stylesheet" type="text/css" media="all">
+        <!-- //font-awesome icons -->
+        <!--Shoping cart-->
+        <link rel="stylesheet" href="~/Content/Tema/web/css/shop.css" type="text/css" />
+        <!--//Shoping cart-->
+        <!--checkout-->
+        <link rel="stylesheet" type="text/css" href="~/Content/Tema/web/css/checkout.css">
+        <!--//checkout-->
+        <!--stylesheets-->
+        <link href="~/Content/Tema/web/css/style.css" rel='stylesheet' type='text/css' media="all">
+        <!--//stylesheets-->
+        <link href="//fonts.googleapis.com/css?family=Sunflower:500,700" rel="stylesheet">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+    </head>
+    <body>
+        @if (TempData["Hata"] != null)
+        {
+            <section class="checkout py-lg-4 py-md-3 py-sm-3 py-3">
+                <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+                    <div class="shop_inner_inf">
+                        <div class="privacy about">
+                            <h3>Alışveriş Sepetiniz</h3>
+                            <div class="checkout-right">
+                                <h1>Kullanıcı Girişi <span>Hatası! </span></h1>
+
+                                <div class="col-md-4 checkout-left-basket" style="text-align:center; margin-left:300px">
+                                    <h4><a href="/Urun/Index"><i class="fa fa-shopping-cart"> </i> @TempData["Hata"]</a></h4>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        }
+        else
+        {
+        if (Model.urunler.LongCount() > 0)
+        {
+
+            <section class="checkout py-lg-4 py-md-3 py-sm-3 py-3">
+                <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+                    <div class="shop_inner_inf">
+                        <div class="privacy about">
+                            <h3>Alışveriş<span>Sepeti</span></h3>
+                            <div class="checkout-right">
+                                <h4>Alışveriş Sepetiniz de: <span>@Model.urunler.LongCount() Adet Farklı </span> Ürün vardır.</h4>
+                                <table class="timetable_sub">
+                                    <thead>
+                                        <tr>
+                                            <th>Sıra No.</th>
+                                            <th>Ürün Resmi</th>
+                                            <th>Ürün Sayisi</th>
+                                            <th>Ürün Adi</th>
+                                            <th>Ürün Fiyat</th>
+                                            <th>Sil</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.urunler)
+                                        {
+                                            <tr class="rem1">
+                                                <td class="invert">1</td>
+                                                <td class="invert-image"><a href="/Urun/UrunDetay/@item.Urun.urunId"><img src="/Content/Resimler/Kullanici/@item.Urun.urunTekResim" alt=" " class="img-responsive"></a></td>
+                                                <td class="invert">
+                                                    <div class="quantity">
+                                                        <div class="quantity-select">
+
+                                                            <div class="entry value"><span>@item.Adet</span></div>
+
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="invert">@item.Urun.urunAd</td>
+                                                <td class="invert">@(item.Urun.urunFiyat)  <b>TL</b></td>
+                                                <td class="invert">
+                                                    <div class="rem">
+
+                                                        @using (Html.BeginForm("SepetSil", "AlisverisSepeti", FormMethod.Post))
+                                                        {
+                                                            @Html.Hidden("Id", item.Urun.urunId)
+                                                            <button type="submit" class="btn btn-danger">
+                                                                <i class="fa fa-trash" aria-hidden="true">Silmek İçin...</i>
+                                                            </button>
+                                                        }
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="checkout-left">
+                                <div class="col-md-4 checkout-left-basket">
+                                    <h4><a href="/Urun/Index">Alışverişe Devam Et </a></h4>
+                                    <ul>
+                                        @foreach (var item in Model.urunler)
+                                        {
+
+                                            if (item.Adet > 1)
+                                            {
+                                                <li><b style="font-size:13px">@item.Urun.urunAd         <i>  @item.Urun.urunFiyat * @item.Adet </i>  <span> = +@(item.Urun.urunFiyat * item.Adet) <b>TL</b></span></b>  </li>
+                                            }
+                                            else
+                                            {
+                                                <li><b style="font-size:13px">@item.Urun.urunAd </b>  <b> <i>  @item.Urun.urunFiyat </i>  <span> = +@(item.Urun.urunFiyat * item.Adet) TL</span></b></li>
+                                            }
+
+
+
+
+
+                                        }
+
+                                        <li>Kargo Ücreti <i>-----</i> <span><del>-=4.99 TL</del></span></li>
+                                        <li>Toplam Fiyat <i>---</i> <span><button class="btn btn-block" style="margin-bottom:9px; width:150px"> <i class="fa fa-shopping-cart"></i> @Model.ToplamFiyat() TL </button></span></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-8 address_form">
+                                    <h4>Adresiniz</h4>
+
+                                    @using (Html.BeginForm("Adres", "AlisverisSepeti", FormMethod.Post, new { @class = "creditly-card-form agileinfo_form" }))
+                                    {
+                                        if (k != null)
+                                        {
+                                            <section class="creditly-wrapper wrapper">
+                                                <div class="information-wrapper">
+                                                    <div class="first-row form-group">
+                                                        <div class="controls">
+                                                            <label class="control-label">Ad ve Soyadiniz: </label>
+                                                            <input class="billing-address-name form-control" value="@k.kullaniciAd @k.kullaniciSoyad" type="text" name="name" placeholder="Ad ve Soyadınız">
+                                                        </div>
+                                                        <div class="card_number_grids">
+                                                            <div class="card_number_grid_left">
+                                                                <div class="controls">
+                                                                    <label class="control-label">Telefon Numaranız:</label>
+                                                                    <input class="form-control" value="@k.kullaniciTelefon" name="telNo" type="text" placeholder="Telefon Numarası">
+                                                                </div>
+                                                            </div>
+                                                            <div class="card_number_grid_right">
+                                                                <div class="controls">
+                                                                    <label class="control-label">Bölgeniz: </label>
+                                                                    <input class="form-control" value="@k.kullaniciAdres" name="bolge" type="text" placeholder="Bölge">
+                                                                </div>
+                                                            </div>
+                                                            <div class="clear"> </div>
+                                                        </div>
+                                                        <div class="controls">
+                                                            <label class="control-label">Şehir/İlçe: </label>
+                                                            <input class="form-control" name="bolge" type="text" placeholder="Şehir/İlçe">
+                                                        </div>
+                                                        <div class="controls">
+                                                            <label class="control-label">Adres Tipi: </label>
+                                                            <select class="form-control option-w3ls" name="secim" style="height:45px">
+
+                                                                <option>Ofis</option>
+                                                                <option>Ev</option>
+                                                                <option>Reklam İçin</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <button class="submit check_out">Bu Adrese teslim Et...</button>
+                                                </div>
+                                            </section>
+                                        }
+                                        else
+                                        {
+                                            <section class="creditly-wrapper wrapper">
+                                                <div class="information-wrapper">
+                                                    <div class="first-row form-group">
+                                                        <div class="controls">
+                                                            <label class="control-label">Ad ve Soyadiniz: </label>
+                                                            <input class="billing-address-name form-control"  type="text" name="name" placeholder="Ad ve Soyadınız">
+                                                        </div>
+                                                        <div class="card_number_grids">
+                                                            <div class="card_number_grid_left">
+                                                                <div class="controls">
+                                                                    <label class="control-label">Telefon Numaranız:</label>
+                                                                    <input class="form-control"  name="telNo" type="text" placeholder="Telefon Numarası">
+                                                                </div>
+                                                            </div>
+                                                            <div class="card_number_grid_right">
+                                                                <div class="controls">
+                                                                    <label class="control-label">Bölgeniz: </label>
+                                                                    <input class="form-control"  name="bolge" type="text" placeholder="Bölge">
+                                                                </div>
+                                                            </div>
+                                                            <div class="clear"> </div>
+                                                        </div>
+                                                        <div class="controls">
+                                                            <label class="control-label">Şehir/İlçe: </label>
+                                                            <input class="form-control" name="bolge" type="text" placeholder="Şehir/İlçe">
+                                                        </div>
+                                                        <div class="controls">
+                                                            <label class="control-label">Adres Tipi: </label>
+                                                            <select class="form-control option-w3ls" name="secim" style="height:45px">
+
+                                                                <option>Ofis</option>
+                                                                <option>Ev</option>
+                                                                <option>Reklam İçin</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <button class="submit check_out">Bu Adrese teslim Et...</button>
+                                                </div>
+                                            </section>
+                                        }
+
+                                    }
+
+                                    <div class="checkout-right-basket">
+                                        <a href="/AlisverisSepeti/Adres">Ödemeyi Yap </a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"> </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- //top products -->
+                </div>
+            </section>
+        }
+        else
+        {
+            <section class="checkout py-lg-4 py-md-3 py-sm-3 py-3">
+                <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+                    <div class="shop_inner_inf">
+                        <div class="privacy about">
+                            <h3>Alışveriş Sepetiniz</h3>
+                            <div class="checkout-right">
+                                <h1>Alışveriş Sepetiniz de: <span>Ürün Bulunmamaktadadır! </span></h1>
+
+                                <div class="col-md-4 checkout-left-basket" style="text-align:center; margin-left:300px">
+                                    <h4><a href="/Urun/Index"><i class="fa fa-shopping-cart"> </i>    Alışverişe Devam Etmek İçin Tıklayınız...</a></h4>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        }}
+        <script src='~/Content/Tema/web/js/jquery-2.2.3.min.js'></script>
+    </body>
+</html>

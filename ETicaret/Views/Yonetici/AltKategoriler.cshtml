@@ -1,0 +1,98 @@
+﻿@using ETicaret.Models;
+
+@model List<AltKategori>
+
+
+@{
+    ViewBag.Title = "AltKategoriler";
+    Layout = "~/Views/Shared/_LayoutYonetici.cshtml";
+}
+<link rel="stylesheet" href="~/Content/Tema1/plugins/datatables/dataTables.bootstrap4.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/Content/Tema1/dist/css/adminlte.min.css">
+<div class="card">
+
+    <div class="card-header">
+        <h3 class="card-title"><b>Alt Kategoriler</b>(@Model.Count tane alt kategori bulundu...) </h3>
+
+        <div class="card-tools">
+            <a href="/Yonetici/AltKategorilerEkle" class="btn btn-info btn-sm">
+                <i class="fa fa-plus-square-o"></i> Yeni Alt Kategori Ekle
+            </a>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0" style="display: block;">
+        @if (TempData["AEkle"] != null)
+        {
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fa fa-check"></i> Başarılı!</h5>
+                @TempData["AEkle"]
+            </div>
+        }
+        @if (TempData["ADuzenle"] != null)
+        {
+            <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fa fa-info"></i> Başarılı!</h5>
+                @TempData["ADuzenle"]
+            </div>
+        }
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th> <img src="~/Content/Resimler/Kullanici/camera.png" />Resim</th>
+                    <th><img src="~/Content/Resimler/Kullanici/countdown.png" />Id</th>
+                    <th><img src="~/Content/Resimler/Kullanici/users.png" />Ad</th>
+                    <th><img src="~/Content/Resimler/Kullanici/diagram.png" />Ana Kategori</th>
+                    <th><img src="~/Content/Resimler/Kullanici/mail.png" />Tanım</th>
+                    <th><img src="~/Content/Resimler/Kullanici/negotiation.png" /> İşlemler</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var kategori in Model)
+                {
+                    <tr>
+                        <td style="width:40px;text-align:center;">
+                            <img src="~/Content/Resimler/Kullanici/@kategori.altKategoriResim" style="width:30px;" />
+                        </td>
+                        <td>@kategori.altKategoriId</td>
+                        <td>@kategori.altKategoriAd</td>
+                        <td>@kategori.Kategori.kategoriAd</td>
+                        <td>@kategori.altKategoriTanim</td>
+
+                        <td>
+                            <a title="Düzenle" class="btn btn-primary" href="/Yonetici/AltKategorilerDuzenle/@kategori.altKategoriId?==altkategoriId">
+                                <i class="fa fa-edit"></i>
+                            </a>
+
+                            <a title="Detay" class="btn btn-warning" href="/Yonetici/UrunleriGor/@kategori.altKategoriId?==altkategoriId">
+                                <i class="fa fa-question-circle-o"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+    </div>
+    <script src="~/Content/Tema1/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/Tema1/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/Tema1/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/Tema1/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <!-- SlimScroll -->
+    <script src="~/Content/Tema1/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    
+  
+   
+    <!-- /.card-body -->
+</div>
+
+

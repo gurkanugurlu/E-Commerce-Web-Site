@@ -1,0 +1,89 @@
+﻿@using ETicaret.Models
+@using ETicaret.Settings
+@using ETicaret.Models.ModelsView
+@model List<Siparis>
+@{
+    ViewBag.Title = "KullaniciSiparisler";
+    Layout = "~/Views/Shared/_LayoutYonetici.cshtml";
+}
+
+
+<div class="card">
+
+    <div class="card-header">
+        <h3 class="card-title"><b>Siparisler</b>&nbsp; (@Model.Count() tane sipariş bulundu...) </h3>
+
+
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0" style="display: block;">
+
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th> <img src="~/Content/Resimler/Kullanici/countdown.png" />Sipariş Id</th>
+                    <th> <img src="~/Content/Resimler/Kullanici/faq.png" />Sipariş Durum </th>
+                    <th><img src="~/Content/Resimler/Kullanici/users.png" />Kullanıcı</th>
+                    <th><img src="~/Content/Resimler/Kullanici/trucking.png" />Kargo Id</th>
+                    <th><img src="~/Content/Resimler/Kullanici/mobilephone.png" />Telefon</th>
+                    <th> <img src="~/Content/Resimler/Kullanici/address2.png" />Adres</th>
+                    <th><img src="~/Content/Resimler/Kullanici/calendar.png" />Sipariş Tarih</th>
+                    <th><img src="~/Content/Resimler/Kullanici/cln.png" />Sipariş Teslim Tarih</th>
+                    <th> <img src="~/Content/Resimler/Kullanici/budget2.png" />Toplam Fiyat</th>
+                    <th><img src="~/Content/Resimler/Kullanici/negotiation.png" />İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var siparis in Model)
+                {
+                    <tr style="text-align:left">
+                        <td>@siparis.siparisId</td>
+                        <td>@siparis.SiparisDurum.siparisDurum1</td>
+                        <td>@siparis.Kullanici.kullaniciAd</td>
+                        <td>@siparis.Kargo.Ad</td>
+                        <td>@siparis.Kullanici.kullaniciTelefon</td>
+                        <td>@siparis.Kullanici.kullaniciAdres</td>
+                        <td>@siparis.siparisTarih</td>
+                        @if (siparis.SiparisTeslimTarih == null)
+                        {
+                            <td>Sipariş Adrese Ulaşmadı.</td>
+                        }
+                        else
+                        {
+                            <td>@siparis.SiparisTeslimTarih</td>
+                        }
+
+                        <td>@siparis.toplamFiyat.ToString().Substring(0, 5) TL</td>
+
+                        <td>
+                            <a title="OdemeDetay" class="btn btn-info" href="/Yonetici/OdemeDetay/@siparis.siparisId?==siparisId">
+                                <i class="fa fa-edit"></i>
+                            </a>
+
+                            <a title="SiparisDetay" class="btn btn-warning" href="/Yonetici/SiparisDetay/@siparis.siparisId?==siparisId">
+                                <i class="fa fa-address-book"></i>
+                            </a>
+                            <a title="Düzenle" class="btn btn-secondary" href="/Yonetici/SiparisDuzenle/@siparis.siparisId?==siparisId">
+                                <i class="fa fa-question-circle-o"></i>
+                            </a>
+                        </td>
+
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+    </div>
+    <script src="~/Content/Tema1/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/Tema1/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/Tema1/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/Tema1/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <!-- SlimScroll -->
+    <script src="~/Content/Tema1/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <!-- /.card-body -->
+</div>

@@ -1,0 +1,86 @@
+﻿@using ETicaret.Models;
+@model List<GeriIade>
+@{
+    ViewBag.Title = "GeriIade";
+    Layout = "~/Views/Shared/_LayoutYonetici.cshtml";
+}
+
+<div class="card">
+
+    <div class="card-header">
+        <h3 class="card-title"><b>Geri Iade Form</b>&nbsp;(@Model.Count tane geri iade Talebi bulundu...)</h3>
+
+        <div class="card-tools">
+            <a href="/Yonetici/MarkaEkle" class="btn btn-info btn-sm">
+                <i class="fa fa-plus-square-o"></i> Yeni Marka Ekle
+            </a>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0" style="display: block;">
+        @if (TempData["GSil"] != null)
+        {
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fa fa-check"></i> Başarılı!</h5>
+                @TempData["GSil"]
+            </div>
+        }
+        @if (TempData["GDuzenle"] != null)
+        {
+            <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fa fa-info"></i> Başarılı!</h5>
+                @TempData["GDuzenle"]
+            </div>
+        }
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th> <img src="~/Content/Resimler/Kullanici/countdown.png" />Geri Iade Id</th>
+                    <th><img src="~/Content/Resimler/Kullanici/cart.png" />Siparis Id</th>
+                    <th><img src="~/Content/Resimler/Kullanici/mail.png" />Iade Sebep</th>
+                    <th><img src="~/Content/Resimler/Kullanici/negotiation.png" />Iade Talep</th>
+                    <th><img src="~/Content/Resimler/Kullanici/negotiation.png" />İşlemler</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var talep in Model)
+                {
+                <tr>
+
+                    <td>@talep.geriIadeId</td>
+                    <td>@talep.geriIadesiparisId</td>
+                    <td>@talep.geriIadeSebep</td>
+                    <td>@talep.geriIadeTalep</td>
+
+                    <td>
+                        <a title="Talep Düzenle" class="btn btn-primary" href="/Yonetici/SiparisDuzenle/@talep.geriIadesiparisId?==siparisId">
+                            <i class="fa fa-edit"></i>
+                        </a>
+
+                        <a onclick="return confirm('Geri Iade Talebini Reddetmek istediğinizden emin misiniz ?')" title="Sil" class="btn btn-danger" href="/Yonetici/GeriIadeSil/@talep.geriIadeId?==urunId">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                    </td>
+                </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+    </div>
+    <script src="~/Content/Tema1/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/Tema1/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/Tema1/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/Tema1/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <!-- SlimScroll -->
+    <script src="~/Content/Tema1/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <!-- /.card-body -->
+</div>
+

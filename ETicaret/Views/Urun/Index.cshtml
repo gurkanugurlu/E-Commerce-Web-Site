@@ -1,0 +1,1269 @@
+﻿@using ETicaret.Settings @using ETicaret.Models
+
+@model List<Urun>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ETicaretEntities db = new ETicaretEntities();
+    Sayilar sayilar = new Sayilar();
+    sayilar.urunSayisi = db.Urun.Count();
+    sayilar.kategoriSayisi = db.Kategori.Count();
+    sayilar.kullaniciSayisi = db.Kullanici.Count();
+    sayilar.markaSayisi = db.Marka.Count();
+    sayilar.altKategoriSayisi = db.AltKategori.Count();
+    
+    
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AlisVeris</title>
+    <style>
+        .container {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 22px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+            /* Hide the browser's default checkbox */
+            .container input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                height: 0;
+                width: 0;
+            }
+
+        /* Create a custom checkbox */
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            background-color: #eee;
+        }
+        .chmark{
+            position:absolute;
+            top:0;
+            left:0;
+            height:13.5px;
+            width:13.5px;
+            background-color:#eee;
+        }
+
+        /* On mouse-over, add a grey background color */
+        .container:hover input ~ .checkmark {
+            background-color: #ccc;
+        }
+        .container:hover input ~ .chmark {
+            background-color: #ccc;
+        }
+
+        /* When the checkbox is checked, add a blue background */
+        .container input:checked ~ .checkmark {
+            background-color: #2196F3;
+        }
+        .container input:checked ~ .chmark {
+            background-color: #2196F3;
+        }
+
+        /* Create the checkmark/indicator (hidden when not checked) */
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+        .chmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        /* Show the checkmark when checked */
+        .container input:checked ~ .checkmark:after {
+            display: block;
+        }
+        .container input:checked ~ .chmark:after {
+            display: block;
+        }
+
+        /* Style the checkmark/indicator */
+        .container .checkmark:after {
+            left: 7.5px;
+            top: 4.5px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+        .container .chmark:after {
+            left: 5px;
+            top: 3px;
+            height: 7px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+        a.my-class {
+            color: Yellow
+        }
+
+            a.my-class:active {
+                color: Yellow
+            }
+
+            a.my-class:link {
+                color: Yellow
+            }
+
+            a.my-class:visited {
+                color: Yellow
+            }
+        .k {
+           backface-visibility:inherit; 
+           visibility:visible;
+        }
+       a {
+           color:cornsilk;
+       }
+
+    </style>
+</head>
+<body>
+    @Html.Partial("resimDiv")
+    <!--//banner -->
+    <!-- short -->
+    <!-- //short-->
+    <!--show Now-->
+    <!--show Now-->
+    <section class="contact py-lg-4 py-md-3 py-sm-3 py-3">
+        <div class="container-fluid py-lg-5 py-md-4 py-sm-4 py-3">
+            <h3 class="title text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">Ürünlerimiz</h3>
+            @if (TempData["Mesaj"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                    <h5><i class="icon fa fa-ban"></i> @TempData["Mesaj"]</h5>
+                    
+                </div>
+            }
+                <ul class="table-secondary" style="font-size:20px">
+
+
+                    <li style="float:left; margin-right:50px; margin-left:820px">@Html.ActionLink("Fiyata Gore Sırala", "Index", "Urun", new { Sorting_Order = "Fiyata_Gore" }, "PuanaGoreSirala")</li>
+                    <li style="float:left; margin-right:50px">@Html.ActionLink("Ada Gore Sırala", "Index", "Urun", new { Sorting_Order = "Ada_Gore" }, "AdaGoreSirala")</li>
+                    <li style="float:left; margin-right:50px">@Html.ActionLink("İndirime Gore Sırala", "Index", "Urun", new { Sorting_Order = "İndirime_Gore" }, "IndirimeGoreSırala")</li>
+                    <li >@Html.ActionLink("Zamana Gore Sırala", "Index", "Urun", new { Sorting_Order = "Zamana_Gore" }, "ZamanaGoreSirala")</li>
+
+                </ul>
+            <div class="row">
+                <div class="side-bar col-lg-3">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fa fa-tag " style="color:deeppink"></i>
+                            @Model.Count() Tane Urun Bulundu...
+                        </h3>
+                    </div>
+
+                    <div class="search-hotel">
+                        <h3 class="agileits-sear-head">Ara </h3>
+                        @using (Html.BeginForm("Ara", "Urun"))
+                        {
+                            <input type="search" placeholder="Ürün adı..." name="aramaString" required="">
+                            <input type="submit" value=" ">
+                        }
+
+                    </div>
+                    <!-- price range -->
+                    <div class="range">
+                        <h3 class="agileits-sear-head">Kategoriler </h3>
+                        <h5><i class="fa fa-barcode" style="color:deeppink"></i> @sayilar.kategoriSayisi tane kategori bulundu...</h5>
+                        <br />
+                        @using (Html.BeginForm("KategoriAra", "Urun", FormMethod.Post))
+                        {
+                            <ul>
+
+                                @foreach (var kategori in (List<Kategori>)ViewBag.Kategori)
+
+                                {
+
+                                    <li>
+                                        <label class="container" style="font-size:15px">
+                                            @kategori.kategoriAd
+
+                                            (@kategori.AltKategori.Select(x => x.Urun.Select(k => k.altKategoriId == x.altKategoriId)).Count())
+
+                                            <input type="checkbox" value="@kategori.kategoriId" name="id">
+                                            <span class="checkmark"></span>
+
+                                        </label>
+                                    </li>}
+
+
+
+                            </ul>
+                            <button type="submit" class="btn subscrib-btnn">Ara</button>
+                        }
+                    </div>
+                    <div class="range">
+                        <h3 class="agileits-sear-head">Alt Kategoriler </h3>
+                        <h5><i class="fa fa-arrow-down " style="color:deeppink"></i> @sayilar.altKategoriSayisi tane alt kategori bulundu...</h5>
+                        <br />
+                        @using (Html.BeginForm("AltKategoriAra", "Urun", FormMethod.Post))
+                        {
+                            <ul>
+                                @foreach (var altKategori in (List<AltKategori>)ViewBag.AltKategori)
+                                {
+                                    <li>
+                                        <label class="container" style="font-size:11px">
+                                            @altKategori.altKategoriAd
+                                            (@altKategori.Urun.Select(x => x.altKategoriId == altKategori.altKategoriId).Count())
+                                            <input type="checkbox" value="@altKategori.altKategoriId" name="id">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                }
+
+
+                            </ul>
+                            <button type="submit" class="btn subscrib-btnn">Ara</button>
+                        }
+
+                    </div>
+
+
+                    <div class="range">
+                        <h3 class="agileits-sear-head"><i class="fa fa-bullseye" style="color:deeppink"></i> Yaş Aralığı </h3>
+                        @using (Html.BeginForm("YasAra", "Urun", FormMethod.Post))
+                        {
+                            <ul>
+
+                                <li>
+                                    <label class="container" style="font-size:15px">
+                                        0-2 Yaş
+                                        <input type="checkbox" value="2" name="id">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <label class="container" style="font-size:15px">
+                                        2-6 Yaş
+                                        <input type="checkbox" value="3" name="id">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="container" style="font-size:15px">
+                                        6-10 Yaş
+                                        <input type="checkbox" value="6" name="id">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="container" style="font-size:15px">
+                                        10 Yaş Üzeri
+                                        <input type="checkbox" value="10" name="id">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </li>
+                            </ul>
+                            <button type="submit" class="btn subscrib-btnn">Ara</button>
+                        }
+                    </div>
+                    <div class="range">
+                        <h3 class="agileits-sear-head"><i class="fa fa-dollar" style="color:deeppink"></i> <span style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif"> Fiyat Aralığı </span></h3>
+                        @using (Html.BeginForm("FiyatAra", "Urun", FormMethod.Post))
+                        {
+                            <ul>
+                                <li>
+                                    <label class="container" style="font-size:15px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                                        0-25 Tl
+                                        <input type="checkbox" value="0" name="id">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="container" style="font-size:15px;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                                        25-50 Tl
+                                        <input type="checkbox" value="25" name="id">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <label class="container" style="font-size:15px;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                                        50-75 Tl
+                                        <input type="checkbox" value="50" name="id">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="container" style="font-size:15px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                                        75-100 Tl
+                                        <input type="checkbox" value="75" name="id">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="container" style="font-size:15px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                                        100 Tl Üzeri
+                                        <input type="checkbox" value="100" name="id">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </li>
+                            </ul>
+                            <button type="submit" class="btn subscrib-btnn">Ara</button>
+                        }
+
+
+                    </div>
+                    <!-- //price range -->
+                    <!--preference -->
+                    <div class="range">
+                        <h3 class="agileits-sear-head">Markalar </h3>
+                        <h5><i class="fa fa-handshake-o" style="color:deeppink"></i> @ViewBag.MarkaSayi tane Marka bulundu...</h5>
+                        @using (Html.BeginForm("MarkaAra", "Urun", FormMethod.Post))
+                        {
+                            <ul>
+                                @foreach (var marka in (List<Marka>)ViewBag.Markalar)
+                                {
+                                    <li>
+                                        <label class="container" style="font-size:15px">
+                                            @marka.markaAd
+                                            <input type="checkbox" value="@marka.markaId" name="id">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                }
+
+                            </ul>
+                            <button type="submit" class="btn subscrib-btnn">Ara</button>
+                        }
+                    </div>
+                    <!-- // preference -->
+                    <!-- discounts -->
+
+                    <div class="range">
+                        <h3 class="agileits-sear-head"><i class="fa fa-chevron-circle-down" style="color:deeppink"></i> İndirim Oranları </h3>
+                        <ul>
+                            <li>
+                                <label class="container" style="font-size:15px;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                                    10% ve Üzeri
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="container" style="font-size:15px;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                                    25% ve Üzeri
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="container" style="font-size:15px;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                                    40% ve Üzeri
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                            <li>
+                            <li>
+                                <label class="container" style="font-size:15px;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                                    60% ve Üzeri
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+
+
+                        </ul>
+
+                    </div>
+                    <!-- //discounts -->
+                    <!-- reviews -->
+                    <div class="range">
+                        <div class="customer-rev left-side">
+                            <h3 class="agileits-sear-head"><i class="fa fa-thumbs-up" style="color:deeppink"></i> Kullanıcı Yorumları</h3>
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span><b>5.0</b></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <span><b>4.0</b></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half"></i>
+                                        <i class="far fa-star"></i>
+                                        <span><b>3.0</b></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <span><b>2.5</b></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <span><b>2.0</b></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- //reviews -->
+                    <!-- deals -->
+                    <div class="deal-leftmk left-side">
+                        <h3 class="agileits-sear-head">En Çok Satan Ürünler</h3>
+                        @foreach (var item in (List < Urun >)ViewBag.Populer)
+                        {
+                        <div class="row special-sec1">
+                            <div class="col-xs-4 img-deals">
+                                <img src="~/Content/Resimler/Kullanici/@item.urunTekResim" alt="foto yok" class="img-fluid" height="75"  style="width:75px; height:75px;">
+                            </div>
+                            <div class="col-xs-8 img-deal1">
+                                <h3>@item.urunAd</h3>
+                                <a href="/Urun/UrunDetay/@item.urunId">@item.urunFiyat.00 TL</a>
+                                
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        }
+                       
+                    </div>
+                    <!-- //deals -->
+                </div>
+
+
+                <div class="left-ads-display col-lg-9">
+                    <div class="row">
+                        @foreach (var urun in Model)
+                        {
+                            <div class="col-lg-4 col-md-6 col-sm-6 product-men women_two">
+                                <div class="product-toys-info">
+                                    <div class="men-pro-item">
+                                        <div class="men-thumb-item">
+
+                                            <img src="~/Content/Resimler/Kullanici/@urun.urunTekResim" class="img-thumbnail img-fluid" alt="">
+                                            <div class="men-cart-pro">
+                                                <div class="inner-men-cart-pro">
+                                                    <a href="/Urun/UrunDetay/@urun.urunId" class="link-product-add-cart">Hızlı Bakış</a>
+                                                </div>
+
+                                            </div>
+                                            @if (urun.urunStokSayisi < 13)
+                                            {
+                                                <button type="button" class="btn btn-block btn-info btn-flat" style="width:125px"><i style="font-size:12px">Son @urun.urunStokSayisi Urun...</i></button>
+                                                <img src="~/Content/Resimler/Kullanici/abc.png" style="width:64px" />
+                                                <img src="~/Content/Resimler/Kullanici/@urun.Marka.markaResim" style="width:64px" />
+                                                <img src="~/Content/Resimler/Kullanici/enIyiFiyat.png" style="width:64px" />
+
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Content/Resimler/Kullanici/new-products-label.png" style="width:64px" />
+                                                <img src="~/Content/Resimler/Kullanici/@urun.Marka.markaResim" style="width:64px" />
+                                                <img src="~/Content/Resimler/Kullanici/enIyiFiyat.png" style="width:64px" />
+
+                                            }
+                                            @if (Convert.ToInt32(((ViewBag.Tarih - Convert.ToDateTime(urun.urunEklenmeTarih)).TotalDays.ToString())) <= 30)
+                                            {
+                                                <ul>
+                                                    <li>
+                                                        <span class="product-new-top">Yeni Ürün</span>
+                                                    </li>
+
+
+                                                </ul>
+
+                                            }
+                                            else
+                                            {
+                                                <span class="product-new-top">@Convert.ToInt32(((ViewBag.Tarih - Convert.ToDateTime(urun.urunEklenmeTarih)).TotalDays.ToString())) Günlük </span>
+
+                                            }
+
+                                        </div>
+                                        <div class="item-info-product">
+                                            <div class="info-product-price">
+                                                <div class="grid_meta">
+                                                    <div class="product_price">
+                                                        <h4>
+                                                            <a href="/Urun/UrunDetay">@urun.urunAd</a>
+                                                        </h4>
+                                                        <div class="grid-price mt-2">
+                                                            @if (urun.urunKampanyaVarMı == true)
+                                                            {
+                                                                <span class="money "><span class="badge badge-info" style="font-size:16px"><del>@urun.urunEskiFiyat .00 TL</del></span></span> <span class="money "><span class="badge badge-warning" style="font-size:16px">@urun.urunFiyat .00 TL</span></span>
+                                                            }
+                                                            else if (urun.urunKampanyaVarMı == false)
+                                                            {
+                                                            <span class="money "><span class="badge badge-info" style="font-size:16px">@urun.urunFiyat .00 TL</span></span>
+                                                            }
+                                                        </div>
+                                                    </div>
+
+                                                    <ul class="stars">
+                                                        @try
+                                                        {
+                                                            foreach (var puan in (Dictionary<double, double>)ViewBag.UrunPuan)
+                                                            {
+                                                                if (puan.Key == urun.urunId)
+                                                                {
+                                                                    for (int i = 1; i <= puan.Value; i++)
+                                                                    {
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <i class="fas fa-star"></i>
+                                                                            </a>
+                                                                        </li>
+
+
+                                                                    }
+                                                                }
+
+                                                                else
+                                                                {
+
+                                                                }
+                                                                if (puan.Key == urun.urunId)
+                                                                {
+                                                                    if ((puan.Value == 1.5 || puan.Value == 2.5) || (puan.Value == 3.5 || puan.Value == 4.5))
+                                                                    {
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <i class="fas fa fa-star-half"></i>
+
+                                                                            </a>
+                                                                        </li>
+
+                                                                    }
+                                                                    @puan.Value.ToString()
+
+                                                                }
+
+
+
+                                                            }
+
+
+                                                        }
+                                                        catch (Exception )
+                                                        {
+
+                                                        }
+
+                                                    </ul>
+
+                                                </div>
+                                                <div class="toys single-item hvr-outline-out">
+
+
+
+
+
+                                                    @using (Html.BeginForm("SepeteEkle", "AlisverisSepeti", FormMethod.Post))
+                                                    {
+
+                                                        <input type="hidden" name="urunId" value="@urun.urunId" />
+
+                                                        <button type="submit" class="toys-cart ptoys-cart">
+                                                            <i class="fas fa-cart-plus"></i>
+
+                                                        </button>
+
+
+
+
+
+
+                                                    }
+
+
+
+
+                                                </div>
+
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+
+                @*<div class="left-ads-display col-lg-9">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-6 product-men women_two">
+                        <div class="product-toys-info">
+                            <div class="men-pro-item">
+                                <div class="men-thumb-item">
+                                    <img src="~/Content/Tema/web/images/a1.jpg" class="img-thumbnail img-fluid" alt="">
+                                    <div class="men-cart-pro">
+                                        <div class="inner-men-cart-pro">
+                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                        </div>
+                                    </div>
+                                    <span class="product-new-top">New</span>
+                                </div>
+                                <div class="item-info-product">
+                                    <div class="info-product-price">
+                                        <div class="grid_meta">
+                                            <div class="product_price">
+                                                <h4>
+                                                    <a href="single.html">toys(barbie)</a>
+                                                </h4>
+                                                <div class="grid-price mt-2">
+                                                    <span class="money ">50 Tl</span>
+                                                </div>
+                                            </div>
+                                            <ul class="stars">
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fas fa-star"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fas fa-star"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fas fa-star"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fas fa-star"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="far fa-star-half-o"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="toys single-item hvr-outline-out">
+                                            <form action="#" method="post">
+                                                <input type="hidden" name="cmd" value="_cart">
+                                                <input type="hidden" name="add" value="1">
+                                                <input type="hidden" name="toys_item" value="toys(barbie)">
+                                                <input type="hidden" name="amount" value="575.00">
+                                                <button type="submit" class="toys-cart ptoys-cart">
+                                                    <i class="fas fa-cart-plus"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 product-men women_two">
+                        <div class="product-toys-info">
+                            <div class="men-pro-item">
+                                <div class="men-thumb-item">
+                                    <img src="~/Content/Tema/web/images/a2.jpg" class="img-thumbnail" alt="">
+                                    <div class="men-cart-pro">
+                                        <div class="inner-men-cart-pro">
+                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                        </div>
+                                    </div>
+                                    <span class="product-new-top">New</span>
+                                </div>
+                                <div class="item-info-product">
+                                    <div class="info-product-price">
+                                        <div class="grid_meta">
+                                            <div class="product_price">
+                                                <h4>
+                                                    <a href="single.html">toy(todos)</a>
+                                                </h4>
+                                                <div class="grid-price mt-2">
+                                                    <span class="money ">$480.00</span>
+                                                </div>
+                                            </div>
+                                            <ul class="stars">
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fas fa-star"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fas fa-star"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="far fa-star-half-o"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="toys single-item hvr-outline-out">
+                                            <form action="#" method="post">
+                                                <input type="hidden" name="cmd" value="_cart">
+                                                <input type="hidden" name="add" value="1">
+                                                <input type="hidden" name="toys_item" value="toy(todos)">
+                                                <input type="hidden" name="amount" value="480.00">
+                                                <button type="submit" class="toys-cart ptoys-cart">
+                                                    <i class="fas fa-cart-plus"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 product-men women_two">
+                        <div class="product-toys-info">
+                            <div class="men-pro-item">
+                                <div class="men-thumb-item">
+                                    <img src="~/Content/Tema/web/images/a3.jpg" class="img-thumbnail" alt="">
+                                    <div class="men-cart-pro">
+                                        <div class="inner-men-cart-pro">
+                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                        </div>
+                                    </div>
+                                    <span class="product-new-top">New</span>
+                                </div>
+                                <div class="item-info-product">
+                                    <div class="info-product-price">
+                                        <div class="grid_meta">
+                                            <div class="product_price">
+                                                <h4>
+                                                    <a href="single.html">toys (Grey)</a>
+                                                </h4>
+                                                <div class="grid-price mt-2">
+                                                    <span class="money ">70 Tl</span>
+                                                </div>
+                                            </div>
+                                            <ul class="stars">
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="toys single-item hvr-outline-out">
+                                            <form action="#" method="post">
+                                                <input type="hidden" name="cmd" value="_cart">
+                                                <input type="hidden" name="add" value="1">
+                                                <input type="hidden" name="toys_item" value="toys (Grey)">
+                                                <input type="hidden" name="amount" value="265.00">
+                                                <button type="submit" class="toys-cart ptoys-cart">
+                                                    <i class="fas fa-cart-plus"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 product-men women_two">
+                        <div class="product-toys-info">
+                            <div class="men-pro-item">
+                                <div class="men-thumb-item">
+                                    <img src="~/Content/Tema/web/images/a4.jpg" class="img-thumbnail" alt="">
+                                    <div class="men-cart-pro">
+                                        <div class="inner-men-cart-pro">
+                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                        </div>
+                                    </div>
+                                    <span class="product-new-top">New</span>
+                                </div>
+                                <div class="item-info-product">
+                                    <div class="info-product-price">
+                                        <div class="grid_meta">
+                                            <div class="product_price">
+                                                <h4>
+                                                    <a href="single.html">toys (red)</a>
+                                                </h4>
+                                                <div class="grid-price mt-2">
+                                                    <span class="money ">15 Tl</span>
+                                                </div>
+                                            </div>
+                                            <ul class="stars">
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="toys single-item hvr-outline-out">
+                                            <form action="#" method="post">
+                                                <input type="hidden" name="cmd" value="_cart">
+                                                <input type="hidden" name="add" value="1">
+                                                <input type="hidden" name="toys_item" value="toys (red)">
+                                                <input type="hidden" name="amount" value="67.00">
+                                                <button type="submit" class="toys-cart ptoys-cart">
+                                                    <i class="fas fa-cart-plus"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 product-men women_two">
+                        <div class="product-toys-info">
+                            <div class="men-pro-item">
+                                <div class="men-thumb-item">
+                                    <img src="~/Content/Tema/web/images/a3.jpg" class="img-thumbnail" alt="">
+                                    <div class="men-cart-pro">
+                                        <div class="inner-men-cart-pro">
+                                            <a href="/Urun/UrunDetay" class="link-product-add-cart">Quick View</a>
+                                        </div>
+                                    </div>
+                                    <span class="product-new-top">New</span>
+                                </div>
+                                <div class="item-info-product">
+                                    <div class="info-product-price">
+                                        <div class="grid_meta">
+                                            <div class="product_price">
+                                                <h4>
+                                                    <a href="/Urun/UrunDetay">toys(blue)</a>
+                                                </h4>
+                                                <div class="grid-price mt-2">
+                                                    <span class="money ">$340.00</span>
+                                                </div>
+                                            </div>
+                                            <ul class="stars">
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="toys single-item hvr-outline-out">
+                                            <form action="#" method="post">
+                                                <input type="hidden" name="cmd" value="_cart">
+                                                <input type="hidden" name="add" value="1">
+                                                <input type="hidden" name="toys_item" value="toys(blue)">
+                                                <input type="hidden" name="amount" value="340.00">
+                                                <button type="submit" class="toys-cart ptoys-cart">
+                                                    <i class="fas fa-cart-plus"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 product-men women_two">
+                        <div class="product-toys-info">
+                            <div class="men-pro-item">
+                                <div class="men-thumb-item">
+                                    <img src="~/Content/Tema/web/images/a1.jpg" class="img-thumbnail" alt="">
+                                    <div class="men-cart-pro">
+                                        <div class="inner-men-cart-pro">
+                                            <a href="single.html" class="link-product-add-cart">Hızlı Bakış</a>
+                                        </div>
+                                    </div>
+                                    <span class="product-new-top">New</span>
+                                </div>
+                                <div class="item-info-product">
+                                    <div class="info-product-price">
+                                        <div class="grid_meta">
+                                            <div class="product_price">
+                                                <h4>
+                                                    <a href="/Urun/UrunDetay">toys(pink)</a>
+                                                </h4>
+                                                <div class="grid-price mt-2">
+                                                    <span class="money ">20 Tl</span>
+                                                </div>
+                                            </div>
+                                            <ul class="stars">
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="toys single-item hvr-outline-out">
+                                            <form action="#" method="post">
+                                                <input type="hidden" name="cmd" value="_cart">
+                                                <input type="hidden" name="add" value="1">
+                                                <input type="hidden" name="toys_item" value="toys(pink)">
+                                                <input type="hidden" name="amount" value="160.00">
+                                                <button type="submit" class="toys-cart ptoys-cart">
+                                                    <i class="fas fa-cart-plus"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 product-men women_two">
+                        <div class="product-toys-info">
+                            <div class="men-pro-item">
+                                <div class="men-thumb-item">
+                                    <img src="~/Content/Tema/web/images/a2.jpg" class="img-thumbnail" alt="">
+                                    <div class="men-cart-pro">
+                                        <div class="inner-men-cart-pro">
+                                            <a href="single.html" class="link-product-add-cart">Hızlı Bak</a>
+                                        </div>
+                                    </div>
+                                    <span class="product-new-top">New</span>
+                                </div>
+                                <div class="item-info-product">
+                                    <div class="info-product-price">
+                                        <div class="grid_meta">
+                                            <div class="product_price">
+                                                <h4>
+                                                    <a href="/Urun/UrunDetay">toy(todos)</a>
+                                                </h4>
+                                                <div class="grid-price mt-2">
+                                                    <span class="money ">35 Tl</span>
+                                                </div>
+                                            </div>
+                                            <ul class="stars">
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="toys single-item hvr-outline-out">
+                                            <form action="#" method="post">
+                                                <input type="hidden" name="cmd" value="_cart">
+                                                <input type="hidden" name="add" value="1">
+                                                <input type="hidden" name="toys_item" value="toy(todos)">
+                                                <input type="hidden" name="amount" value="480.00">
+                                                <button type="submit" class="toys-cart ptoys-cart">
+                                                    <i class="fas fa-cart-plus"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 product-men women_two">
+                        <div class="product-toys-info">
+                            <div class="men-pro-item">
+                                <div class="men-thumb-item">
+                                    <img src="~/Content/Tema/web/images/a3.jpg" class="img-thumbnail" alt="">
+                                    <div class="men-cart-pro">
+                                        <div class="inner-men-cart-pro">
+                                            <a href="/Urun/UrunDetay" class="link-product-add-cart">Hızlı Bakış</a>
+                                        </div>
+                                    </div>
+                                    <span class="product-new-top">New</span>
+                                </div>
+                                <div class="item-info-product">
+                                    <div class="info-product-price">
+                                        <div class="grid_meta">
+                                            <div class="product_price">
+                                                <h4>
+                                                    <a href="/Urun/UrunDetay">toys (Grey)</a>
+                                                </h4>
+                                                <div class="grid-price mt-2">
+                                                    <span class="money ">35 Tl</span>
+                                                </div>
+                                            </div>
+                                            <ul class="stars">
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="toys single-item hvr-outline-out">
+                                            <form action="#" method="post">
+                                                <input type="hidden" name="cmd" value="_cart">
+                                                <input type="hidden" name="add" value="1">
+                                                <input type="hidden" name="toys_item" value="toys (Grey)">
+                                                <input type="hidden" name="amount" value="265.00">
+                                                <button type="submit" class="toys-cart ptoys-cart">
+                                                    <i class="fas fa-cart-plus"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 product-men women_two">
+                        <div class="product-toys-info">
+                            <div class="men-pro-item">
+                                <div class="men-thumb-item">
+                                    <img src="~/Content/Tema/web/images/a4.jpg" class="img-thumbnail" alt="">
+                                    <div class="men-cart-pro">
+                                        <div class="inner-men-cart-pro">
+                                            <a href="/Urun/UrunDetay" class="link-product-add-cart">Hızlı Bakış</a>
+                                        </div>
+                                    </div>
+                                    <span class="product-new-top">New</span>
+                                </div>
+                                <div class="item-info-product">
+                                    <div class="info-product-price">
+                                        <div class="grid_meta">
+                                            <div class="product_price">
+                                                <h4>
+                                                    <a href="/Urun/UrunDetay">toys (Grey)</a>
+                                                </h4>
+                                                <div class="grid-price mt-2">
+                                                    <span class="money ">$67.00</span>
+                                                </div>
+                                            </div>
+                                            <ul class="stars">
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fas fa-star"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="toys single-item hvr-outline-out">
+                                            <form action="#" method="post">
+                                                <input type="hidden" name="cmd" value="_cart">
+                                                <input type="hidden" name="add" value="1">
+                                                <input type="hidden" name="toys_item" value="toys (Grey)">
+                                                <input type="hidden" name="amount" value="67.00">
+                                                <button type="submit" class="toys-cart ptoys-cart">
+                                                    <i class="fas fa-cart-plus"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> *@
+
+
+            </div>
+        </div>
+    </section>
+
+    <script src='~/Content/Tema/web/js/jquery-2.2.3.min.js'></script>
+</body>
+
+</html>
+
+

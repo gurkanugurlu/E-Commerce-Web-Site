@@ -1,0 +1,260 @@
+﻿<style>
+    .buscar-caja {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #2f3640;
+        height: 50px;
+        border-radius: 40px;
+        padding: 10px;
+    }
+
+        .buscar-caja:hover > .buscar-txt {
+            width: 250px;
+            padding: 0 6px;
+        }
+
+        .buscar-caja:hover > .buscar-btn {
+
+            background: white;
+            color: black;
+        }
+
+    .buscar-btn {
+        color: #e84118;
+        float: right;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #2f3640;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.4s;
+        color: white;
+        cursor: pointer;
+    }
+
+        .buscar-btn > i {
+            font-size: 30px;
+        }
+
+    .buscar-txt {
+        border: none;
+        background: none;
+        outline: none;
+        float: left;
+        padding: 0;
+        color: white;
+        font-size: 16px;
+        transition: 0.4s;
+        line-height: 40px;
+        width: 0px;
+        font-weight: bold;
+    }
+</style>
+@using ETicaret.Models;
+@{
+    ETicaretEntities db = new ETicaretEntities();
+    Kullanici kullanici = (Kullanici)Session["Kullanici"];
+    Sepet sepet = (Sepet)Session["Sepet"];
+    int sonuc = 0;
+    if (sepet != null) {
+        foreach (var item in sepet.urunler)
+        {
+            sonuc += item.Adet;
+
+        }
+    }
+    List<Kategori> kategori = db.Kategori.ToList();
+}
+
+
+<div class="header-outs" id="home">
+    <div class="header-bar">
+        <div class="info-top-grid">
+            <div class="info-contact-agile">
+                <ul>
+                    <li>
+                        <span class="fas fa-phone-volume"></span>
+                        <p><b>05382056461</b></p>
+                    </li>
+                    <li>
+                        <span class="fas fa-envelope"></span>
+                        <p><a href="mailto:egotoys@gmail.com">egotoys@gmail.com</a></p>
+                    </li>
+
+                    <li>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="hedder-up row">
+                <div class="col-lg-3 col-md-3 logo-head">
+                    <h1> <a href="/Home/Index"><img src="~/Content/Tema/web/images/ikon2.png" /></a> <img src="~/Content/Tema/web/images/foto.jpg" /></h1>
+
+                </div>
+                <div class="col-lg-5 col-md-6 search-right">
+                    @using (Html.BeginForm("Ara", "Urun", FormMethod.Post))
+                    {
+                        <div class="buscar-caja">
+
+                            
+                            <input type="text" name="aramaString" class="buscar-txt" placeholder="Ara..." />
+                            <a class="buscar-btn" href="/Urun/Ara">
+                                <span class="fas fa-search"></span>
+                            </a>
+
+                            @*
+                            *@
+                        </div>
+                    }
+                </div>
+                <div class="col-lg-4 col-md-8 right-side-cart" style="padding-top:10px">
+
+                    <ul class="input-group mb-3">
+
+                        @if (kullanici == null)
+                        {
+                            <li>
+                                <div class="input-group-prepend">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        Hoşgeldiniz...
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="/Login/Index">Giriş Yap</a>
+                                        <a class="dropdown-item" href="/Kayit/Index">Üye Ol</a>
+                                       
+
+                                    </div>
+
+                                    <!-- /btn-group -->
+
+                                </div>
+                            </li>}
+                        @if (kullanici != null)
+                        {
+                            <li style="margin-right:5px">
+                                <div class="image">
+                               <a href="/Kullanici/Index">     <img src="~/Content/Resimler/Kullanici/@kullanici.kullaniciResim" width="42" height="42" class="img-circle elevation-2" alt="User Image"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="input-group-prepend">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <b><span style="font-size:11px">Hesabım</span></b>
+                                        <span style="font-size:10px"> @kullanici.kullaniciAd @kullanici.kullaniciSoyad</span>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="/Kullanici/Index">Profiliniz</a>
+                                        <a class="dropdown-item" href="/Kullanici/Siparisler">Siparişleriniz</a>
+                                        <a class="dropdown-item" href="/Kullanici/UrunIade">Ürün İade Talebi Oluştur</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="/Kullanici/Cikis">Çıkış</a>
+                                    </div>
+
+                                    <!-- /btn-group -->
+
+                                </div>
+                            </li>
+                        }
+                        <li class="toyscart toyscart2 cart cart box_1" style="margin-left:8px;margin-top:6px;">
+
+
+                            @if (sepet != null)
+                            {
+
+                                <a href="/AlisverisSepeti/Index" style="margin-left:15px">
+                                    <i class="fa fa-shopping-cart" style="font-size:25px">
+                                        (@sonuc)
+                                    </i>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="/AlisverisSepeti/Index" style="margin-left:15px">  <i class="fa fa-shopping-cart" style="font-size:25px"> (0) </i></a>
+                            }
+
+                        </li>
+                    </ul>
+
+
+                    @*<div class="cart-icons">
+                            <ul>
+                                @if (kullanici == null)
+                                {
+                                <li>
+                                    <i>Hesabım</i>  <a href="/Login/Index"><span class="far fa-user"></span></a>
+                                </li>}
+                                else
+                                {
+                                <li>
+                                    @kullanici.kullaniciAd <a href="/Home/Index"><span class="far fa-user"></span></a>
+
+                                </li>
+                                }
+                                <li class="toyscart toyscart2 cart cart box_1">
+                                    <form action="#" method="post" class="last">
+                                        <input type="hidden" name="cmd" value="_cart">
+                                        <input type="hidden" name="display" value="1">
+                                        <button class="top_toys_cart" type="submit" name="submit" value="">
+                                            <span class="fas fa-cart-arrow-down"></span>
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                <ul class="navbar-nav ">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/Home/Index"><span class="fas fa-home"></span> Anasayfa<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Home/About" class="nav-link"><span class="fas fa-question"></span> Hakkimizda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Home/Service" class="nav-link"><span class="fas fa-thumbs-up"></span> Servisler</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Urun/Index" class="nav-link"><span class="fas fa-cart-arrow-down"></span> Şimdi Başla</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="fas fa-hand-point-right"></span> Kategoriler
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @foreach (var item in kategori)
+                            {
+
+                            <a class="nav-link" href="/Kategori/Index/@item.kategoriId"> @item.kategoriAd </a>
+                            }
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Home/Contact" class="nav-link"><span class="fas fa-envelope"></span> Iletisim</a>
+                    </li>
+                    @if (kullanici != null)
+                    {
+                        if (((kullanici.Yetki.yetkiAd == "Yonetici") || (kullanici.Yetki.yetkiAd == ("Editor")) || (kullanici.Yetki.yetkiAd == "Editor")))
+                        {
+                            <li class="nav-item">
+                                <a href="/Yonetici/Index" class="nav-link"><span class="fas fa-columns"></span> Yonetici Paneli</a>
+                            </li>}
+                    }
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+</div>
+

@@ -1,0 +1,385 @@
+﻿@using ETicaret.Models;
+@model Urun
+@{
+    ViewBag.Title = "UrunDetay";
+    Kullanici kullanici = (Kullanici)Session["Kullanici"];
+
+}
+
+@Html.Partial("resimDiv")
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <script src="~/Content/Tema/web/js/jquery.flexslider.js"></script>
+    <title>Toys Shop an Ecommerce Category Bootstrap Responsive Web Template | Home :: w3layouts</title>
+    <!--meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Toys Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+   
+    <!--//meta tags ends here-->
+    <!--booststrap-->
+
+    <link href="~/Content/Tema/web/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
+    <!--//booststrap end-->
+    <!-- font-awesome icons -->
+    <link href="~/Content/Tema/web/css/fontawesome-all.min.css" rel="stylesheet" type="text/css" media="all">
+    <!-- //font-awesome icons -->
+    <!--Shoping cart-->
+    <link rel="stylesheet" href="~/Content/Tema/web/css/shop.css" type="text/css"/>
+    <!--//Shoping cart-->
+    
+    <link href="~/Content/Tema/web/css/easy-responsive-tabs.css" rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="~/Content/Tema/web/css/flexslider.css" type="text/css" media="screen" />
+    <!--stylesheets-->
+    <link href="~/Content/Tema/web/css/style.css" rel='stylesheet' type='text/css' media="all">
+    <!--//stylesheets-->
+    
+</head>
+<body>
+
+    <section class="banner-bottom py-lg-5 py-3">
+        <div class="container">
+            <div class="inner-sec-shop pt-lg-4 pt-3">
+                <div class="row">
+                    <div class="col-lg-4 single-right-left ">
+                        <div class="grid images_3_of_2">
+                            <div class="flexslider1">
+                                <ul class="slides">
+                                    <li data-thumb="images/f2.jpg">
+                                        <div class="thumb-image"> <img src="~/Content/Resimler/Kullanici/@Model.urunTekResim" data-imagezoom="true" class="img-fluid" alt=" "> </div>
+                                    </li>
+
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 single-right-left simpleCart_shelfItem">
+                        <h1 style="color:deeppink">@Model.urunAd</h1>
+                        <p>
+                            @if (Model.urunKampanyaVarMı == true)
+                            {
+                                <span class="money "><span class="badge badge-info" style="font-size:16px"><del>@Model.urunEskiFiyat .00 TL</del></span></span> <span class="money "> <span class="badge badge-warning" style="font-size:16px">@Model.urunFiyat .00 TL</span></span>
+                            }
+                            else if (Model.urunKampanyaVarMı == false)
+                            {
+                                <span class="money "><span class="badge badge-info" style="font-size:16px">@Model.urunFiyat .00 TL</span></span>
+                            }
+
+                        </p>
+                        <div class="rating1">
+                            <ul class="stars">
+                                @try
+                                {
+                                    foreach (var puan in (Dictionary<double, double>)ViewBag.UrunPuan)
+                                    {
+                                        if (puan.Key == Model.urunId)
+                                        {
+                                            for (int i = 1; i <= puan.Value; i++)
+                                            {
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fas fa-star" style="font-size:25px"></i>
+                                                    </a>
+                                                </li>
+
+
+                                            }
+                                        }
+
+                                        else
+                                        {
+
+                                        }
+                                        if (puan.Key == Model.urunId)
+                                        {
+                                            if ((puan.Value == 1.5 || puan.Value == 2.5) || (puan.Value == 3.5 || puan.Value == 4.5))
+                                            {
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fas fa fa-star-half" style="font-size:25px"></i>
+
+                                                    </a>
+                                                </li>
+
+                                            }
+                                            <li style="font-size:25px;">@puan.Value</li>
+
+                                        }
+
+
+
+                                    }
+
+
+                                }
+                                catch (Exception)
+                                {
+
+                                }
+
+                            </ul>
+                        </div>
+                        <div class="description">
+                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal-two" style="width:250px">
+                                İnternete Özel Fiyat
+                            </button>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal-two" style="width:100px">
+                                @Model.Marka.markaAd
+                            </button>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal-two" style="width:245px">
+                                @Model.AltKategori.altKategoriAd
+                            </button>
+
+                        </div>
+                        <div class="description">
+                            <button type="submit" class="btn btn-default">
+                                <i class="fa fa-shopping-cart"></i>   Kargo Bedava
+                            </button>
+                            <button type="submit" class="btn btn-default">
+                                <i class="fa fa-arrow-circle-up"></i>   En İyi Fiyat
+                            </button>
+                            <button type="submit" class="btn btn-default">
+                                <i class="fa fa-envelope"></i>   En Kaliteli Marka
+                            </button>
+                            <button type="submit" class="btn btn-default">
+                                <i class="fa fa-life-ring"></i>   2 Yıl Garanti
+                            </button>
+                        </div>
+
+
+                        <div class="occasion-cart">
+                            <div class="toys single-item singlepage">
+                                @using (Html.BeginForm("SepeteEkle", "AlisverisSepeti", FormMethod.Post))
+                                {
+
+                                    @Html.HiddenFor(x => x.urunId)
+
+                                    <button type="submit" class="toys-cart ptoys-cart add">
+                                        Sepete Ekle
+                                    </button>
+
+
+
+
+
+
+
+                                }
+
+
+
+
+
+
+                            </div>
+                        </div>
+                        <ul class="footer-social text-left mt-lg-4 mt-3">
+                            <li>Paylaş: </li>
+                            <li class="mx-1">
+                                <a href="#">
+                                    <span class="fab fa-facebook-f"></span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="#">
+                                    <span class="fab fa-twitter"></span>
+                                </a>
+                            </li>
+                            <li class="mx-1">
+                                <a href="#">
+                                    <span class="fab fa-google-plus-g"></span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="#">
+                                    <span class="fab fa-linkedin-in"></span>
+                                </a>
+                            </li>
+                            <li class="mx-1">
+                                <a href="#">
+                                    <span class="fas fa-rss"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"> </div>
+                    <!--/tabs-->
+                    <div class="responsive_tabs">
+                        <div id="horizontalTab">
+                            <ul class="resp-tabs-list">
+                                <li>Tanım</li>
+                                <li>Yorumlar</li>
+                                <li>Ayrıntılı Bilgi</li>
+                            </ul>
+                            <div class="resp-tabs-container">
+                                <!--/tab_one-->
+                                <div class="tab1">
+                                    <div class="single_page">
+                                        <h6>@Model.urunAd</h6>
+                                        <p>
+                                            @Model.urunTanim
+                                        </p>
+                                        <p class="para">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie
+                                            blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                            ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. labore et dolore
+                                            magna aliqua.
+                                        </p>
+                                    </div>
+                                </div>
+                                <!--//tab_one-->
+                                <div class="tab2">
+                                    <div class="single_page">
+                                        <div class="bootstrap-tab-text-grids">
+                                            @foreach (var item in (List<Yorum>)ViewBag.UrunYorum)
+                                            {
+                                                <div class="bootstrap-tab-text-grid">
+                                                    <div class="bootstrap-tab-text-grid-left">
+                                                        <img src="~/Content/Resimler/Kullanici/@item.Kullanici.kullaniciResim" width="96" alt=" " class="img-fluid">
+                                                        <b style="margin-top:6px">@item.Kullanici.kullaniciAd @item.Kullanici.kullaniciSoyad</b>
+
+                                                    </div>
+                                                    <ul>
+                                                        <li>
+                                                            <b style="margin-left:15px">Yorum Tarihi:</b> <i style="font-size:18px"> @item.yorumTarih.ToString().Substring(0, 10) </i>
+
+                                                        </li>
+
+                                                    </ul>
+                                                    <div class="bootstrap-tab-text-grid-right">
+
+                                                        <p>
+                                                            Yorum İçerik: <b style="font-size:17px"> @item.yorumIcerik  </b>
+                                                        </p>
+                                                    </div>
+                                                    <div class="clearfix"> </div>
+                                                </div>
+                                            }
+
+                                            <div class="add-review">
+                                                <h3><b>Bir Yorum Yaz</b></h3>
+
+                                                @using (Html.BeginForm("UrunDetay", "Urun", FormMethod.Post))
+                                                {
+                                                    if (kullanici != null)
+                                                    {
+                                                        <div class="row">
+
+
+                                                            <div class="col-md-6">
+                                                                @Html.HiddenFor(x => x.urunId)
+                                                                <b>     Ad ve Soyadiniz:<input type="text" name="name" required="" value="@kullanici.kullaniciAd @kullanici.kullaniciSoyad"> </b>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <b>    Mail Adresiniz: <input type="email" name="email" required="" value="@kullanici.kullaniciMail"> </b>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <b>        Ürüne Verdiğiniz Puan: <input type="text" name="puan" required=""> </b>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12" style="text-align:center">
+                                                            <b>  Mesajiniz:<textarea name="mesaj" required=""></textarea> </b>
+                                                            <input type="submit" value="GÖNDER" style="text-align:center" class="btn btn-success">
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="/Login/Index" class="btn btn-warning">Yorum Yapmak İçin Giriş Yapınız.</a>
+                                                    }
+                                                }
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="tab3">
+                                    <div class="single_page">
+                                        <h6>@Model.urunAd</h6>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie
+                                            blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                            ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. labore et dolore
+                                            magna aliqua.
+                                        </p>
+                                        <p class="para">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie
+                                            blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                            ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. labore et dolore
+                                            magna aliqua.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--//tabs-->
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="product py-lg-4 py-md-3 py-sm-3 py-3">
+        <div class="container py-lg-5 py-md-5 py-sm-4 py-3">
+            <h3 class="title text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">AYNI KATEGORİDEKİ DİĞER ÜRÜNLERİMİZ...</h3>
+            <div class="row banner-below-w3l" style="width:450px">
+                @foreach (var urun in (List<Urun>)ViewBag.Ur)
+                {
+                    <div class="col-lg-4 col-md-6 col-sm-6 text-center banner-agile-flowers">
+                        <img src="~/Content/Resimler/Kullanici/@urun.urunTekResim" class="img-thumbnail" alt="">
+                        <div class="banner-right-icon">
+                            <a href="/Urun/UrunDetay/@urun.urunId"> <h4 class="pt-3"><b style="font-size:12px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"><i>@urun.urunAd </i></b></h4></a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <script src='~/Content/Tema/web/js/jquery-2.2.3.min.js'></script>
+    <!-- newsletter modal -->
+    <!-- cart-js -->
+    <!-- //cart-js -->
+    <!-- price range (top products) -->
+
+
+    <script src="~/Content/Tema/web/js/imagezoom.js"></script>
+    <!-- single -->
+    <!-- script for responsive tabs -->
+    <script src="~/Content/Tema/web/js/easy-responsive-tabs.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $('#horizontalTab').easyResponsiveTabs({
+                type: 'default', //Types: default, vertical, accordion
+                width: 'auto', //auto or any width like 600px
+                fit: true, // 100% fit in a container
+                closed: 'accordion', // Start closed if in accordion view
+                activate: function (event) { // Callback function if tab is switched
+                    var $tab = $(this);
+                    var $info = $('#tabInfo');
+                    var $name = $('span', $info);
+                    $name.text($tab.text());
+                    $info.show();
+                }
+            });
+            $('#verticalTab').easyResponsiveTabs({
+                type: 'vertical',
+                width: 'auto',
+                fit: true
+            });
+        });
+    </script>
+    <!-- FlexSlider -->
+    <!-- //FlexSlider-->
+    <!-- start-smoth-scrolling -->
+    <!-- start-smoth-scrolling -->
+    <!-- here stars scrolling icon -->
+    <!-- //here ends scrolling icon -->
+    <!-- //smooth-scrolling-of-move-up -->
+    <!-- //bootstrap working-->
+
+</body></html>

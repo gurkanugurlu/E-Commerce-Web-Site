@@ -1,0 +1,291 @@
+﻿@using ETicaret.Models
+
+
+@{
+    ViewBag.Title = "OdemeYontemi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <title>Toys Shop an Ecommerce Category Bootstrap Responsive Web Template | Home :: w3layouts</title>
+    <!--meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Toys Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script>
+         addEventListener("load", function () {
+         	setTimeout(hideURLbar, 0);
+         }, false);
+
+         function hideURLbar() {
+         	window.scrollTo(0, 1);
+         }
+    </script>
+    <!--//meta tags ends here-->
+    <!--booststrap-->
+    <link href="~/Content/Tema/web/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
+    <!--//booststrap end-->
+    <!-- font-awesome icons -->
+    <link href="~/Content/Tema/web/css/fontawesome-all.min.css" rel="stylesheet" type="text/css" media="all">
+    <!-- //font-awesome icons -->
+    <!--Shoping cart-->
+    <link rel="stylesheet" href="~/Content/Tema/web/css/shop.css" type="text/css" />
+    <!--//Shoping cart-->
+    <!--checkout-->
+    <link rel="stylesheet" type="text/css" href="~/Content/Tema/web/css/checkout.css">
+    <!--//checkout-->
+    <link href="~/Content/Tema/web/css/easy-responsive-tabs.css" rel='stylesheet' type='text/css' />
+    <!--stylesheets-->
+    <link href="~/Content/Tema/web/css/style.css" rel='stylesheet' type='text/css' media="all">
+    <!--//stylesheets-->
+    <link href="//fonts.googleapis.com/css?family=Sunflower:500,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+</head>
+<body>
+    <section class="checkout py-lg-4 py-md-3 py-sm-3 py-3" style="margin-top:200px">
+        <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+            <div class="ads-grid_shop">
+                <div class="shop_inner_inf">
+                    <div class="privacy about">
+                        <h3>Ödeme<span>&nbsp Yöntemleri</span></h3>
+                        <!--/tabs-->
+                        <div class="responsive_tabs">
+                            <div id="horizontalTab">
+                                <ul class="resp-tabs-list">
+                                    
+                                    <li>Kredi Kartı</li>
+                                    <li>İnternet Bankacılığı</li>
+                                    <li>Paypal Hesabı</li>
+                                </ul>
+                                <div class="resp-tabs-container">
+                                    <!--/tab_one-->
+                                   
+                                    
+                                    <!--//tab_one-->
+                                   
+                                    <div class="tab2">
+                                        <div class="pay_info">
+                                            @using (Html.BeginForm("SiparisTamamla", "AlisverisSepeti", FormMethod.Post, new { @class = "creditly-card-form agileinfo_form" })) { 
+                                           
+                                                <section class="creditly-wrapper wthree, w3_agileits_wrapper">
+                                                    <div class="credit-card-wrapper">
+                                                        <div class="first-row form-group">
+                                                            <div class="controls">
+                                                                <label class="control-label">Kart Üzerindeki İsim:</label>
+                                                                <input class="billing-address-name form-control" type="text" name="name" placeholder="Gürkan Uğurlu" required>
+                                                            </div>
+                                                            <div class="w3_agileits_card_number_grids">
+                                                                <div class="w3_agileits_card_number_grid_left">
+                                                                    <div class="controls">
+                                                                        <label class="control-label">Kart Numaranız</label> <img src="~/Content/Resimler/Kullanici/mastercard.png" /> <img src="~/Content/Resimler/Kullanici/visa.png" />
+                                                                        <input class="number credit-card-number form-control" type="text" name="number" inputmode="numeric" autocomplete="cc-number"
+                                                                               autocompletetype="cc-number" x-autocompletetype="cc-number" placeholder="&#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149;" required>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="w3_agileits_card_number_grid_right">
+                                                                    <div class="controls">
+                                                                        <label class="control-label">CVV Numarası</label>
+                                                                        <input class="security-code form-control" Â· inputmode="numeric" type="text" name="guvenlikKod" placeholder="&#149;&#149;&#149;" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clear"> </div>
+                                                            </div>
+                                                            <div class="controls">
+                                                                <label class="control-label">Son Kullanım Tarihi</label>
+                                                                <input class="expiration-month-and-year form-control" type="text" name="ayYıl" placeholder="AA / YY" required>
+                                                            </div>
+                                                        </div>
+                                                        <input type="submit" value="Alışverişi Tamamla">
+                                                    </div>
+                                                </section>
+                                                }
+</div>
+                                    </div>
+                                    <div class="tab3">
+                                        <div class="pay_info">
+                                            <div class="vertical_post">
+                                                @using (Html.BeginForm("SiparisTamamla", "AlisverisSepeti", FormMethod.Post))
+                                                {
+                                                    <h5>Popüler Bankalardan Birini Seçiniz</h5>
+                                                    <div class="swit-radio">
+                                                        <div class="check_box_one">
+                                                            <div class="radio_one"> <label><input type="radio" name="radio" checked="" value="Ziraat"><i></i>Ziraat Bankası</label> </div>
+                                                        </div>
+                                                        <div class="check_box_one">
+                                                            <div class="radio_one"> <label><input type="radio" name="radio" value="Akbank"><i></i>Akbank</label> </div>
+                                                        </div>
+                                                        <div class="check_box_one">
+                                                            <div class="radio_one"> <label><input type="radio" name="radio" value="Kuveyt"><i></i>Kuveyt Türk</label> </div>
+                                                        </div>
+                                                        <div class="check_box_one">
+                                                            <div class="radio_one"> <label><input type="radio" name="radio" value="Is"><i></i>İş Bankası</label> </div>
+                                                        </div>
+                                                        <div class="check_box_one">
+                                                            <div class="radio_one"> <label><input type="radio" name="radio" value="Yapı"><i></i>Yapı Kredi Bankası</label> </div>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+
+                                                    <div class="section_room_pay">
+                                                       
+                                                    </div>
+                                                    <input type="submit" value="Alışverişi Tamamla">
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab4">
+                                        <div class="row pay_info">
+                                            <div class="col-md-6 tab-grid">
+                                                <img class="pp-img" src="~/Content/Tema/web/images/paypal.png" alt="Image Alternative text" title="Image Title">
+                                                <p>Ödemeniz İçin direk Paypala Bağlanacaksınız.</p>
+                                                <a class="btn btn-primary" href="https://www.paypal.com">Paypal Üzerinden Ödeyin...</a>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <form class="cc-form">
+                                                    <div class="clearfix">
+                                                        <div class="form-group form-group-cc-number">
+                                                            <label>Kart Numarası</label>
+                                                            <input class="form-control" name="number" placeholder="xxxx xxxx xxxx xxxx" type="text"><span class="cc-card-icon"></span>
+                                                        </div>
+                                                        <div class="form-group form-group-cc-cvc">
+                                                            <label>CVV(Güvenlik Kodu)</label>
+                                                            <input class="form-control" name="guvenlikKod" placeholder="xxxx" type="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix">
+                                                        <div class="form-group form-group-cc-name">
+                                                            <label>Kart Sahibinin Adı</label>
+                                                            <input class="form-control" name="name" type="text">
+                                                        </div>
+                                                        <div class="form-group form-group-cc-date">
+                                                            <label>Son Geçerlilik Tarhii</label>
+                                                            <input class="form-control"  name="ayYıl" placeholder="mm/yy" type="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="checkbox checkbox-small">
+                                                        <label>
+                                                            <input class="i-check" type="checkbox" checked=""> Kartlarıma Ekle
+                                                        </label>
+                                                    </div>
+                                                    <input class="btn btn-primary submit" type="submit" value="Alışverişi Tamamla">
+                                                </form>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--//tabs-->
+                    </div>
+                </div>
+                <!-- //payment -->
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </section>
+    <script src='~/Content/Tema/web/js/jquery-2.2.3.min.js'></script>
+    <!--//js working-->
+    <!-- cart-js -->
+    <script src="~/Content/Tema/web/js/minicart.js"></script>
+    <script>
+        toys.render();
+
+        toys.cart.on('toys_checkout', function (evt) {
+            var items, len, i;
+
+            if (this.subtotal() > 0) {
+                items = this.items();
+
+                for (i = 0, len = items.length; i < len; i++) { }
+            }
+        });
+    </script>
+    <!--// cart-js -->
+    <!-- easy-responsive-tabs -->
+    <script src="~/Content/Tema/web/js/easy-responsive-tabs.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#horizontalTab').easyResponsiveTabs({
+                type: 'default', //Types: default, vertical, accordion
+                width: 'auto', //auto or any width like 600px
+                fit: true, // 100% fit in a container
+                closed: 'accordion', // Start closed if in accordion view
+                activate: function (event) { // Callback function if tab is switched
+                    var $tab = $(this);
+                    var $info = $('#tabInfo');
+                    var $name = $('span', $info);
+                    $name.text($tab.text());
+                    $info.show();
+                }
+            });
+            $('#verticalTab').easyResponsiveTabs({
+                type: 'vertical',
+                width: 'auto',
+                fit: true
+            });
+        });
+    </script>
+    <!-- credit-card -->
+    <script src="~/Content/Tema/web/js/creditly.js"></script>
+    <link rel="stylesheet" href="~/Content/Tema/web/css/creditly.css" type="text/css" media="all" />
+    <script>
+        $(function () {
+            var creditly = Creditly.initialize(
+                '.creditly-wrapper .expiration-month-and-year',
+                '.creditly-wrapper .credit-card-number',
+                '.creditly-wrapper .security-code',
+                '.creditly-wrapper .card-type');
+
+            $(".creditly-card-form .submit").click(function (e) {
+                e.preventDefault();
+                var output = creditly.validate();
+                if (output) {
+                    // Your validated credit card output
+                    console.log(output);
+                }
+            });
+        });
+    </script>
+    <!-- //credit-card -->
+    <!-- start-smoth-scrolling -->
+    <script src="~/Content/Tema/web/js/move-top.js"></script>
+    <script src="~/Content/Tema/web/js/easing.js"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({
+                    scrollTop: $(this.hash).offset().top
+                }, 900);
+            });
+        });
+    </script>
+    <!-- start-smoth-scrolling -->
+    <!-- here stars scrolling icon -->
+    <script>
+        $(document).ready(function () {
+
+            var defaults = {
+                containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear'
+            };
+            $().UItoTop({
+                easingType: 'easeOutQuart'
+            });
+
+        });
+    </script>
+    <!-- //here ends scrolling icon -->
+    <!--bootstrap working-->
+    <script src="~/Content/Tema/web/js/bootstrap.min.js"></script>
+    <!-- //bootstrap working-->
+</body>
+</html>

@@ -1,0 +1,62 @@
+﻿@using ETicaret.Models;
+
+@model AltKategori
+
+@{
+    ViewBag.Title = "AltKategorilerEkle";
+    Layout = "~/Views/Shared/_LayoutYonetici.cshtml";
+}
+
+
+
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">Alt Kategori Ekle</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    @using (Html.BeginForm("AltKategorilerEkle", "Yonetici", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+    <div class="card-body">
+
+        @if (ViewData["Hata"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                <h5><i class="icon fa fa-ban"></i> Dikkat!</h5>
+                @ViewData["Hata"]
+            </div>
+        }
+
+        @Html.ValidationSummary()
+
+        <div class="form-group">
+            <label>Alt Kategori Adı</label>
+            @Html.TextBoxFor(x => x.altKategoriAd, new { @class = "form-control", placeholder = "Alt Kategori Adı Giriniz" })
+            @*@Html.ValidationMessageFor(x=> x.ad)*@
+        </div>
+        <div class="form-group">
+            <label>Kategoriler</label>
+            @Html.DropDownList("kategoriId", (SelectList)ViewBag.Kategoriler, "Seçiniz...", new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label>Alt Kategori Tanım</label>
+            @Html.TextBoxFor(x => x.altKategoriTanim, new { @class = "form-control", placeholder = "Alt Kategori Tanımını giriniz" })
+            @*@Html.ValidationMessageFor(x => x.soyad)*@
+        </div>
+
+
+
+        <div class="form-group">
+            <label>Alt Kategori Resim</label>
+            <input type="file" name="resimGelen" class="form-control" placeholder="Eklenecek resimi giriniz...">
+        </div>
+    </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </div>
+    }
+</div>

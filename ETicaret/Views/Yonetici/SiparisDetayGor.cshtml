@@ -1,0 +1,54 @@
+﻿@using ETicaret.Models
+@using ETicaret.Settings
+@model  List<SiparisDetay>
+@{
+    ViewBag.Title = "SiparisDetayGor";
+    Layout = "~/Views/Shared/_LayoutYonetici.cshtml";
+}
+<div class="card">
+
+    <div class="card-header">
+        <h3 class="card-title"><b> Ürünün Sipariş Detay Bilgileri</b>&nbsp;  (Bu üründen @ViewBag.Siparis tane satılmıştır...) </h3>
+
+
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0" style="display: block;">
+
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th><img src="~/Content/Resimler/Kullanici/countdown.png" />Siparis Id</th>
+                    <th><img src="~/Content/Resimler/Kullanici/budget2.png" />Ürün Fiyat</th>
+                    <th><img src="~/Content/Resimler/Kullanici/envelope.png" />Ürün Adet</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var s in Model)
+                {
+                    <tr>
+                        <td>@s.siparisId</td>
+                        <td>@s.fiyat.ToString().Substring(0,5). TL</td>
+                        <td>@s.adet</td>
+                        
+
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+    </div>
+    <script src="~/Content/Tema1/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/Tema1/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/Tema1/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/Tema1/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <!-- SlimScroll -->
+    <script src="~/Content/Tema1/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <!-- /.card-body -->
+</div>

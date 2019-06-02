@@ -1,0 +1,667 @@
+﻿@using ETicaret.Models;
+@using ETicaret.Settings;
+@using ETicaret.Models.ModelsView;
+@model SayilarSiparisModel
+@{
+
+    Layout = "~/Views/Shared/_LayoutYonetici.cshtml";
+
+
+
+
+}
+
+
+<section class="content">
+    <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>@Model.Sayilar.urunSayisi </h3>
+                        <p>Ürün Sayisi</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">Daha Fazla Bilgi Al... <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>@Model.Sayilar.kategoriSayisi<sup style="font-size: 20px"></sup></h3>
+                        <p>Toplam Kategori Sayisi</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">Daha Fazla Bilgi Al... <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h3 style="color:white">@Model.Sayilar.kullaniciSayisi</h3>
+                        <p>Kayıtlı Üye Sayisi</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">Daha Fazla Bilgi Al... <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>@Model.Sayilar.aboneSayisi</h3>
+                        <p>Abone Sayisi</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">Daha Fazla Bilgi Al... <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+        </div>
+
+        <!-- /.row -->
+        <!-- Main row -->
+
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box bg-info">
+                    <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Yeni Ürün Sayısı</span>
+                        <span class="info-box-number">@Model.Sayilar.urunSayisi</span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 0"></div>
+                        </div>
+                        <span class="progress-description">
+                            Son 30 günde herhangi bir artış gözükmemektedir.
+                        </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box bg-success">
+                    <span class="info-box-icon"><i class="fa fa-calculator"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Alt Kategori Sayisi</span>
+                        <span class="info-box-number">@Model.Sayilar.altKategoriSayisi</span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 0"></div>
+                        </div>
+                        <span class="progress-description">
+                            Son 30 günde herhangi bir artış gözükmemektedir.
+                        </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box bg-warning">
+                    <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Yeni Üye Sayisi</span>
+                        <span class="info-box-number">0</span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 0"></div>
+                        </div>
+                        <span class="progress-description">
+                            Son 30 günde herhangi bir artış gözükmemektedir.
+                        </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box bg-danger">
+                    <span class="info-box-icon"><i class="fa fa-comments-o"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Mesajlar</span>
+                        <span class="info-box-number">@ViewBag.Bize</span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 0"></div>
+                        </div>
+                        <span class="progress-description">
+
+                        </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box bg-info">
+                    <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Toplam Sipariş Sayısı</span>
+                        <span class="info-box-number">@Model.Sayilar.ToplamSiparisSayisi</span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 0"></div>
+                        </div>
+                        <span class="progress-description">
+
+                        </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box bg-success">
+                    <span class="info-box-icon"><i class="fa fa-calculator"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Yeni Siparişler</span>
+                        <span class="info-box-number">@Model.Sayilar.ToplamSiparisSayisi</span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 0"></div>
+                        </div>
+                        <span class="progress-description">
+
+                        </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-warning"><i class="fa fa-files-o"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Kayıtlı Yetkili Sayisi</span>
+                        <span class="info-box-number">@ViewBag.YetkiliSayisi</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-danger"><i class="fa fa-star-o"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Toplam Yorum Sayısı</span>
+                        <span class="info-box-number">@Model.Sayilar.YorumSayisi</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title"><b>Genel Rapor </b></h5>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-wrench"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <a href="#" class="dropdown-item">Action</a>
+                                    <a href="#" class="dropdown-item">Another action</a>
+                                    <a href="#" class="dropdown-item">Something else here</a>
+                                    <a class="dropdown-divider"></a>
+                                    <a href="#" class="dropdown-item">Separated link</a>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-tool" data-widget="remove">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <p class="text-center">
+                                    <strong>Satış Oranları</strong>
+                                </p>
+                                <div class="chart">
+                                    <!-- Sales Chart Canvas -->
+                                    <canvas id="salesChart" height="180" style="height: 180px;"></canvas>
+                                </div>
+                                <!-- /.chart-responsive -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-md-4">
+                                <p class="text-center">
+                                    <strong>Hedefler</strong>
+                                </p>
+                                <div class="progress-group">
+                                    Yeni Ürünler Ekle
+                                    <span class="float-right"><b>@Model.Sayilar.urunSayisi</b>/100</span>
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar bg-primary" style="width:@(Model.Sayilar.urunSayisi)%"></div>
+                                    </div>
+                                </div>
+                                <!-- /.progress-group -->
+                                <div class="progress-group">
+                                    Toplam Sipariş Sayisi
+                                    <span class="float-right"><b>@Model.Sayilar.ToplamSiparisSayisi</b>/100</span>
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar bg-danger" style="width: @Model.Sayilar.ToplamSiparisSayisi%"></div>
+                                    </div>
+                                </div>
+                                <!-- /.progress-group -->
+                                <div class="progress-group">
+                                    <span class="progress-text">Yeni Alt Kategoriler Ekle</span>
+                                    <span class="float-right"><b>@Model.Sayilar.altKategoriSayisi</b>/50</span>
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar bg-success" style="width:@(Model.Sayilar.altKategoriSayisi*2)%"></div>
+                                    </div>
+                                </div>
+                                <!-- /.progress-group -->
+                                <div class="progress-group">
+                                    Yeni Markalarla Anlaş
+                                    <span class="float-right"><b>@Model.Sayilar.markaSayisi</b>/20</span>
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar bg-warning" style="width: @(Model.Sayilar.markaSayisi*5)%"></div>
+                                    </div>
+                                </div>
+                                <!-- /.progress-group -->
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- ./card-body -->
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-sm-3 col-6">
+                                <div class="description-block border-right">
+                                    <span class="description-percentage text-success"><i class="fa fa-caret-up"></i> </span>
+                                    <h5 class="description-header">@Model.Sayilar.toplamFiyat TL</h5>
+                                    <span class="description-text">TOPLAM KAZANÇ</span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-3 col-6">
+                                <div class="description-block border-right">
+                                    <span class="description-percentage text-warning"><i class="fa fa-caret-left"></i></span>
+                                    <h5 class="description-header">@(Model.Sayilar.toplamFiyat/3) TL</h5>
+                                    <span class="description-text">TOPLAM HARCAMALAR</span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-3 col-6">
+                                <div class="description-block border-right">
+                                    <span class="description-percentage text-success"><i class="fa fa-caret-up"></i></span>
+                                    <h5 class="description-header">@(Model.Sayilar.toplamFiyat-(Model.Sayilar.toplamFiyat/3)) TL</h5>
+                                    <span class="description-text">TOPLAM KAR</span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-3 col-6">
+                                <div class="description-block">
+                                    <span class="description-percentage text-danger"><i class="fa fa-caret-down"></i></span>
+                                    <h5 class="description-header">4</h5>
+                                    <span class="description-text">TAMAMLANAN HEDEFLER</span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.card-footer -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <div class="row">
+            <!-- Left col -->
+            <section class="col-lg-6 connectedSortable">
+                <!-- Custom tabs (Charts with tabs)-->
+                <!-- /.card -->
+                <!-- DIRECT CHAT -->
+                <div class="card">
+                    <div class="card-header no-border">
+                        <h3 class="card-title"><b> En Çok Satan Ürünler </b></h3>
+                        <div class="card-tools">
+                            <a href="#" class="btn btn-tool btn-sm">
+                                <i class="fa fa-download"></i>
+                            </a>
+                            <a href="#" class="btn btn-tool btn-sm">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <table class="table table-striped table-valign-middle">
+                            <thead>
+                                <tr>
+                                    <th>Ürün</th>
+                                    <th>Fiyat</th>
+                                    <th>Kalan Stok Sayısı</th>
+                                    <th>Daha Fazla Bilgi İçin...</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Urun)
+                                {
+                                    <tr>
+                                        <td>
+                                            <img src="~/Content/Resimler/Kullanici/@item.urunTekResim" alt="Product 1" class="img-circle img-size-32 mr-2">
+                                            @item.urunAd
+                                        </td>
+                                        <td><span class="badge badge-success"> @item.urunFiyat.00 TL</span></td>
+                                        <td>
+
+                                            @item.urunStokSayisi@if (item.urunStokSayisi < 20)
+                                            {
+                                                <span class="badge badge-danger">Azalan Ürün</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <a href="/Urun/UrunDetay/@item.urunId" class="text-muted">
+                                                <i class="fa fa-search"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- /.card -->
+                </div>
+
+                <!-- /.card -->
+            </section>
+            <section class="col-lg-6 connectedSortable" style="float:right">
+                <!-- Custom tabs (Charts with tabs)-->
+                <!-- /.card -->
+                <!-- DIRECT CHAT -->
+                <div class="card">
+                    <div class="card-header no-border">
+                        <h3 class="card-title"><b>Yorumlar </b></h3>
+                        <div class="card-tools">
+                            <a href="#" class="btn btn-tool btn-sm">
+                                <i class="fa fa-download"></i>
+                            </a>
+                            <a href="#" class="btn btn-tool btn-sm">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <table class="table table-striped table-valign-middle">
+                            <thead>
+                                <tr>
+                                    <th>Fotoğraf</th>
+                                    <th>İsim-Soyisim</th>
+                                    <th>Yorumİcerik</th>
+                                    <th>Yorum Tarih</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var yorum in (List<Yorum>)ViewBag.Yorum)
+                                {
+                                    <tr>
+                                        <td>
+                                            <img src="~/Content/Resimler/Kullanici/@yorum.Kullanici.kullaniciResim" alt="Product 1" class="img-circle img-size-32 mr-2">
+
+                                        </td>
+                                        <td>@yorum.Kullanici.kullaniciAd @yorum.Kullanici.kullaniciSoyad</td>
+                                        <td>
+
+                                            @yorum.yorumIcerik
+                                        </td>
+                                        <td>
+
+                                            @yorum.yorumTarih
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <!-- /.card -->
+                </div>
+
+                <!-- /.card -->
+            </section>
+
+            <section class="col-lg-6 connectedSortable">
+                <!-- Custom tabs (Charts with tabs)-->
+                <!-- /.card -->
+                <!-- DIRECT CHAT -->
+                <div class="card">
+                    <div class="card-header no-border">
+                        <h3 class="card-title"><b> Son Siparişler </b></h3>
+                        <div class="card-tools">
+                            <a href="#" class="btn btn-tool btn-sm">
+                                <i class="fa fa-download"></i>
+                            </a>
+                            <a href="#" class="btn btn-tool btn-sm">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body p-8">
+                        <table class="table table-striped table-valign-middle">
+                            <thead>
+                                <tr>
+                                    <th>Sipariş Id</th>
+                                    <th>Kullanıcı Id</th>
+                                    <th>Kullanıcı Ad</th>
+                                    <th>Sipariş Durum</th>
+                                    <th>Ürün Idler</th>
+                                    <th>Toplam Fiyat</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var s in (List<Siparis>)ViewBag.Sipariss)
+                                {
+                                    <tr>
+                                        <td>
+                                            @s.siparisId
+
+                                        </td>
+                                        <td>@s.kullaniciId</td>
+                                        <td>
+
+                                            @s.Kullanici.kullaniciAd
+                                        </td>
+
+                                        <td>
+                                            @if (s.siparisDurumId == 1)
+                                            {
+                                                <span class="badge badge-info">@s.SiparisDurum.siparisDurum1</span>
+                                            }
+                                            else if (s.siparisDurumId == 2)
+                                            {
+                                                <span class="badge badge-success">@s.SiparisDurum.siparisDurum1</span>
+                                            }
+                                            else if (s.siparisDurumId == 3)
+                                            {
+                                                <span class="badge badge-danger">@s.SiparisDurum.siparisDurum1</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-warning">@s.SiparisDurum.siparisDurum1</span>
+                                            }
+                                        </td>
+
+                                        <td>
+
+
+                                            @foreach (var item in @s.SiparisDetay.ToList())
+                                            {
+                                                <a href="/Urun/UrunDetay/@item.urunId"> @item.urunId  </a> <i>&nbsp;</i>
+                                            }
+                                        </td>
+                                        <td><span class="badge badge-success"> @s.toplamFiyat.ToString().Substring(0, 6) TL</span></td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- /.card -->
+                </div>
+
+                <!-- /.card -->
+            </section>
+            <!-- /.Left col -->
+            <!-- right col (We are only adding the ID to make the widgets sortable)-->
+            <section class="col-lg-6 connectedSortable" style="margin-top:15px">
+                <div class="card">
+                    <div class="card-header no-border">
+                        <h3 class="card-title"><b> Sitenin Objektif Bilgileri</b> </h3>
+                        <div class="card-tools">
+                            <a href="#" class="btn btn-sm btn-tool">
+                                <i class="fa fa-download"></i>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-tool">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                            <p class="text-success text-xl">
+                                <i class="ion ion-ios-refresh-empty"></i>
+                            </p>
+                            <p class="d-flex flex-column text-right">
+                                <span class="font-weight-bold">
+                                    <i class="ion ion-android-arrow-up text-success"></i> 12
+                                </span>
+                                <span class="text-muted">Toplam Geri Verilen Ürünler </span>
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                            <p class="text-success text-xl">
+                                <i class="ion ion-ios-refresh-empty"></i>
+                            </p>
+                            <p class="d-flex flex-column text-right">
+                                <span class="font-weight-bold">
+                                    <i class="ion ion-android-arrow-up text-success"></i> 0.7%
+                                </span>
+                                <span class="text-muted">Geçen Aya Göre Üye Sayısında Artış </span>
+                            </p>
+                        </div>
+                        <!-- /.d-flex -->
+                        <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                            <p class="text-warning text-xl">
+                                <i class="ion ion-ios-cart-outline"></i>
+                            </p>
+                            <p class="d-flex flex-column text-right">
+                                <span class="font-weight-bold">
+                                    <i class="ion ion-android-arrow-up text-warning"></i> 0.8%
+                                </span>
+                                <span class="text-muted">Geçen Aya Göre Satış Orani</span>
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                            <p class="text-warning text-xl">
+                                <i class="ion ion-ios-cart-outline"></i>
+                            </p>
+                            <p class="d-flex flex-column text-right">
+                                <span class="font-weight-bold">
+                                    <i class="ion ion-android-arrow-up text-warning"></i> 1%
+                                </span>
+                                <span class="text-muted">Geçen Aya Göre Ürün Sayisindaki Artiş</span>
+                            </p>
+                        </div>
+                        <!-- /.d-flex -->
+                        <!-- /.d-flex -->
+                    </div>
+
+                </div>
+
+            </section>
+            <section class="col-lg-6 connectedSortable" style="margin-top:15px">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">En son Üyeler</h3>
+                        <div class="card-tools">
+                            <span class="badge badge-success">Son 30 günde @ViewBag.Sayi kullanıcı kayıt oldu...</span>
+                            <button type="button" class="btn btn-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-widget="remove">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                        <ul class="users-list clearfix">
+                            @foreach (var i in (List<Kullanici>)ViewBag.Atanacak)
+                            {
+                                <li>
+                                    <img src="~/Content/Resimler/Kullanici/@i.kullaniciResim" width="50" height="50" alt="User Image">
+                                    <a class="users-list-name" href="#">@i.kullaniciAd @i.kullaniciSoyad</a>
+                                    <span class="users-list-date">@i.kullaniciKayitTarih.ToString().Substring(0, 10)</span>
+                                </li>
+                            }
+                        </ul>
+                        <!-- /.users-list -->
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer text-center">
+                        <a href="javascript::">Tüm Kullanıcılara Bak</a>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </div>
+        <!-- /.row (main row) -->
+
+
+    </div><!-- /.container-fluid -->
+    <!-- Bootstrap 4 -->
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/Content/Tema1/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/Content/Tema1/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/Tema1/dist/js/adminlte.js"></script>
+    <!-- OPTIONAL SCRIPTS -->
+    <script src="~/Content/Tema1/dist/js/demo.js"></script>
+    <script src="~/Content/Tema1/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <!-- jVectorMap -->
+    <script src="~/Content/Tema1/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="~/Content/Tema1/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <!-- SlimScroll 1.3.0 -->
+    <script src="~/Content/Tema1/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- ChartJS 1.0.2 -->
+    <script src="~/Content/Tema1/plugins/chartjs-old/Chart.min.js"></script>
+    <!-- PAGE SCRIPTS -->
+    <script src="~/Content/Tema1/dist/js/pages/dashboard2.js"></script>
+
+</section>

@@ -1,0 +1,148 @@
+﻿@using ETicaret.Models
+
+@model Kullanici
+@{
+    Layout = null;
+}
+
+<!--
+    Author: W3layouts
+    Author URL: http://w3layouts.com
+    License: Creative Commons Attribution 3.0 Unported
+    License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags -->
+    <title>Ego Toys: Kayıt Ol</title>
+    <meta name="keywords" content="General Application Form Responsive widget, Flat Web Templates, Android Compatible web template,
+	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="~/Content/kayitTema/web/css/style.css" type="text/css" media="all">
+
+    <!-- google fonts  -->
+    <link href="//fonts.googleapis.com/css?family=Alegreya+Sans:100,100i,300,300i,400,400i,500,500i,700,700i,800,800i,900,900i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet">
+
+</head>
+<body>
+    <div class="w3ls-banner">
+        <div class="heading">
+            <h1>EgoToys Kayıt Formu</h1>
+        </div>
+        <div class="container">
+            <div class="heading">
+                <h2>Bilgilerinizi Giriniz</h2>
+                <p>Kayıt olmak için formu doldurunuz...</p>
+            </div>
+            <div class="agile-form">
+                @using (Html.BeginForm("Index", "Kayit", FormMethod.Post))
+                {
+
+                    <ul class="field-list">
+                        <li class="name">
+                            <label class="form-label"> Adınız <span class="form-required"> * </span></label>
+                            <div class="form-input add">
+                                <span class="form-sub-label">
+                                    <input type="text" name="kullaniciAd" placeholder="Adiniz" required>
+                                </span>
+                                <span class="form-sub-label">
+                                    <input type="text" name="kullaniciSoyad" placeholder="Soyadiniz" required>
+                                </span>
+                            </div>
+                        </li>
+                        <li>
+                            <label class="form-label"> E-Mail Adresiniz <span class="form-required"> * </span></label>
+                            <div class="form-input">
+                                <input type="email" name="kullaniciMail" placeholder="mail@gmail.com" required>
+
+                            </div>
+                        </li>
+                        <li>
+                            <label class="form-label"> Şifreniz <span class="form-required"> * </span></label>
+                            <div class="form-input">
+                                <input type="password" name="kullaniciSifre" placeholder="Sifreniz" required style="width:730px; height:35px">
+
+                            </div>
+                        </li>
+                        <li>
+                            <label class="form-label"> Telefon Numarası <span class="form-required"> * </span></label>
+                            <div class="form-input">
+                                <input type="text" name="kullaniciTelefon" placeholder="Telefon Numarası" required>
+                            </div>
+                        </li>
+                        <li>
+                            <label class="form-label"> Cinsiyetiniz <span class="form-required"> *  </span></label>
+                            <div class="form-input">
+                                <select class="form-dropdown" name="cinsiyet" required>
+                                    <option value="">Cinsiyetiniz</option>
+                                    <option value="erkek"> Erkek </option>
+                                    <option value="kadin"> Kadin </option>
+
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <label class="form-label"> Yaşadığınız Şehir <span class="form-required"> * </span></label>
+                            <div class="form-input">
+                                @Html.DropDownListFor(x => x.KullaniciDetay.sehirId, (SelectList)ViewBag.Sehirler, "Seçiniz", new { @class = "form-control" })
+                            </div>
+                        </li>
+                        <li>
+                            <label class="form-label"> Yaşadığınız Ulke <span class="form-required"> * </span></label>
+                            <div class="form-input">
+                                @Html.DropDownListFor(x => x.KullaniciDetay.ulkeId, (SelectList)ViewBag.Ulkeler, "Seçiniz", new { @class = "form-control" })
+                            </div>
+                        </li>
+
+                        <li>
+                            <label class="form-label">
+                                Adresiniz
+                                <span class="form-required"> * </span>
+                            </label>
+                            <div class="form-input add">
+                                <span>
+                                    <input type="text" name="kullaniciAdres" placeholder="Adresiniz" required style="height:75px">
+                                </span>
+
+                            </div>
+                        </li>
+                        <li class="name">
+                            <label class="form-label"> Gizlilik Sorunuz <span class="form-required"> * </span></label>
+                            <div class="form-input add">
+                                <span class="form-sub-label">
+                                    <input type="text" name="kullaniciSoru" placeholder="Sorunuz" required>
+                                </span>
+                                <span class="form-sub-label">
+                                    <input type="text" name="kullaniciSoruCevap" placeholder="Cevabınız" required>
+                                </span>
+                            </div>
+                        </li>
+                        <li>
+                            
+                            <div class="form-group">
+                                <label>Fotoğraf Giriniz</label>
+                                <input type="file" name="resimGelen" class="form-control" placeholder="Resim giriniz" style="width:730px; height:35px; margin-left:180px;">
+                            </div>
+                        </li>
+
+                    </ul>
+                    <i>* İle Gösterilen Bölümler Zorunludur...</i>
+                    <div class="submit_btn" style="width:250px; margin-left:400px">
+                        <input type="submit" value="Kayıt Ol">
+                    </div>
+                    
+                }
+            </div>
+        </div>
+        <div class="copyright">
+            
+        </div>
+    </div>
+</body>
+</html>
+

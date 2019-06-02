@@ -1,0 +1,59 @@
+﻿@using ETicaret.Models
+
+@model List<AltKategori>
+
+
+@{
+    ViewBag.Title = "AltKategoriGor";
+    Layout = "~/Views/Shared/_LayoutYonetici.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Alt Kategoriler </h3>
+
+        <div class="card-tools">
+            <a href="/Yonetici/AltKategorilerEkle" class="btn btn-info btn-sm">
+                <i class="fa fa-plus-square-o"></i> Yeni Alt Kategori Ekle
+            </a>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0" style="display: block;">
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th><img src="~/Content/Resimler/Kullanici/camera.png" height="24" width="24"/>Resim</th>
+                    <th><img src="~/Content/Resimler/Kullanici/countdown.png" />Id</th>
+                    <th><img src="~/Content/Resimler/Kullanici/id.png" />Ad</th>
+                    <th><img src="~/Content/Resimler/Kullanici/backend.png" />Ana Kategori</th>
+                    <th><img src="~/Content/Resimler/Kullanici/mail.png" />Tanım</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var kategori in Model)
+                {
+                    <tr>
+                        <td style="width:40px;text-align:center;">
+                            <img src="~/Content/Resimler/Kullanici/@kategori.altKategoriResim" style="width:30px;" />
+                        </td>
+                        <td>@kategori.altKategoriId</td>
+                        <td>@kategori.altKategoriAd</td>
+                        <td>@kategori.Kategori.kategoriAd</td>
+                        <td>@kategori.altKategoriTanim</td>
+
+                   
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+    </div>
+    <!-- /.card-body -->
+</div>
+

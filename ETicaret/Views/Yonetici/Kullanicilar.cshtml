@@ -1,0 +1,133 @@
+﻿
+@using ETicaret.Models;
+
+@model List<Kullanici>
+@{
+    ViewBag.Title = "Kullanicilar";
+    Layout = "~/Views/Shared/_LayoutYonetici.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Kullanıcılar </h3>
+
+        <div class="card-tools">
+            <a href="/Yonetici/Ekle" class="btn btn-info btn-sm">
+                <i class="fa fa-plus-square-o"></i> Yeni Kullanıcı Ekle
+            </a>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0" style="display: block;">
+        @if (TempData["KEkle"] != null)
+        {
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fa fa-check"></i> Başarılı!</h5>
+                @TempData["KEkle"]
+            </div>
+        }
+        @if (TempData["KDuzenle"] != null)
+        {
+            <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fa fa-info"></i> Başarılı!</h5>
+                @TempData["KDuzenle"]
+            </div>
+        }
+        @if (TempData["KSil"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fa fa-ban"></i> Başarılı!</h5>
+                @TempData["KSil"]
+            </div>
+        }
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th><img src="~/Content/Resimler/Kullanici/countdown.png" />Id</th>
+                    <th><img src="~/Content/Resimler/Kullanici/camera.png" />Resim</th>
+                    <th><img src="~/Content/Resimler/Kullanici/id.png" />Ad</th>
+                    <th><img src="~/Content/Resimler/Kullanici/users.png" />Soyad</th>
+                    <th><img src="~/Content/Resimler/Kullanici/mail.png" />Eposta</th>
+                    <th><img src="~/Content/Resimler/Kullanici/envelope.png" />Adres</th>
+                    <th><img src="~/Content/Resimler/Kullanici/pn.png" />Telefon</th>
+                    <th><img src="~/Content/Resimler/Kullanici/gender.png" />Cinsiyet</th>
+                    <th><img src="~/Content/Resimler/Kullanici/school.png" />Şehir</th>
+                    <th><img src="~/Content/Resimler/Kullanici/rss.png" />Kullanıcı Yetki</th>
+                    <th><img src="~/Content/Resimler/Kullanici/calendar.png" />Kayıt Tarih</th>
+                    <th><img src="~/Content/Resimler/Kullanici/negotiation.png" />İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var kullanici in Model)
+                {
+                    <tr>
+                        <td>@kullanici.kullaniciId</td>
+                        <td style="width:40px;text-align:center;">
+                            <img src="~/Content/Resimler/Kullanici/@kullanici.kullaniciResim" style="width:30px;" />
+                        </td>
+                        <td>@kullanici.kullaniciAd</td>
+                        <td>@kullanici.kullaniciSoyad</td>
+                        <td>@kullanici.kullaniciMail</td>
+                        <td>@kullanici.kullaniciAdres</td>
+                        <td>@kullanici.kullaniciTelefon</td>
+
+
+
+                        @if (kullanici.kullaniciCinsiyet == true)
+                        {
+                            <td>Kadın</td>
+                        }
+                        @if (kullanici.kullaniciCinsiyet == false)
+                        {
+                            <td>Erkek</td>
+                        }
+                        @if (kullanici.kullaniciCinsiyet == null)
+                        {
+                            <td>Belirtilmedi</td>
+                        }
+                        @try
+                        {
+                            if (kullanici.KullaniciDetay != null)
+                            {
+                                <td>@kullanici.KullaniciDetay.Sehirler.sehirAd </td>
+                            }
+
+                        }
+                        catch (Exception ex)
+                        {
+                            <td>@ex.Message="Belirtilmedi"</td>
+
+                        }
+                        @if (kullanici.KullaniciDetay == null)
+                        {
+                            <td> Boş</td>
+                        }
+                        <td>@kullanici.Yetki.yetkiAd</td>
+                        <td>@kullanici.kullaniciKayitTarih</td>
+                        <td>
+                            <a title="Düzenle" class="btn btn-primary" href="/Yonetici/Duzenle/@kullanici.kullaniciId?==kullaniciId">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a onclick="return confirm('Silmek istediğinizden emin misiniz ?')" title="Sil" class="btn btn-danger" href="/Yonetici/Sil/@kullanici.kullaniciId?==kullaniciId">
+                                <i class="fa fa-remove"></i>
+                            </a>
+                            <a title="Detay" class="btn btn-warning" href="/Yonetici/KullaniciSiparisler/@kullanici.kullaniciId?==kullaniciId">
+                                <i class="fa fa-question-circle-o"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+    </div>
+    <!-- /.card-body -->
+</div>
+
+

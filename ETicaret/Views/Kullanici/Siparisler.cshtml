@@ -1,0 +1,279 @@
+﻿@using ETicaret.Models
+@model List<Siparis>
+
+@{
+    ViewBag.Title = "Siparisler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Kullanici kullanici =(Kullanici)Session["Kullanici"];
+    int[] dizi = new int[30];
+    int i = 0;
+    foreach(var item in Model)
+    {
+        dizi[i] = item.siparisId;
+        i++;
+    }
+    int k = 0;
+    int y = 0;
+    string[] dizi2 = new string[30];
+    foreach (var item in Model)
+    {
+        dizi2[y] = item.SiparisDurum.siparisDurum1;
+        y++;
+    }
+    int b = 0;
+
+    decimal[] dizi3 = new decimal[30];
+    foreach (var item in Model)
+    {if(item != null)
+        {
+            dizi3[b] = Convert.ToInt32(item.toplamFiyat);
+            b++;
+        }
+
+    }
+    string[] dizi4 = new string[30];
+    int l = 0;
+    foreach(var item in Model)
+    {
+        dizi4[l] = item.Kullanici.kullaniciAdres;
+        l++;
+    }
+}
+
+@Html.Partial("resimDiv")
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <title>Toys Shop an Ecommerce Category Bootstrap Responsive Web Template | Home :: w3layouts</title>
+    <!--meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Toys Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script>
+         addEventListener("load", function () {
+         	setTimeout(hideURLbar, 0);
+         }, false);
+
+         function hideURLbar() {
+         	window.scrollTo(0, 1);
+         }
+    </script>
+
+    <!--//meta tags ends here-->
+    <!--booststrap-->
+
+    <link href="~/Content/Tema/web/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
+    <!--//booststrap end-->
+    <!-- font-awesome icons -->
+    <link href="~/Content/Tema/web/css/fontawesome-all.min.css" rel="stylesheet" type="text/css" media="all">
+    <!-- //font-awesome icons -->
+    <!--Shoping cart-->
+    <link rel="stylesheet" href="~/Content/Tema/web/css/shop.css" type="text/css" />
+    <!--//Shoping cart-->
+    <!--checkout-->
+    <link rel="stylesheet" type="text/css" href="~/Content/Tema/web/css/checkout.css">
+    <!--//checkout-->
+    <!--stylesheets-->
+    <link href="~/Content/Tema/web/css/style.css" rel='stylesheet' type='text/css' media="all">
+    <!--//stylesheets-->
+    <link href="//fonts.googleapis.com/css?family=Sunflower:500,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+</head>
+<body>
+
+
+    <section class="checkout py-lg-4 py-md-3 py-sm-3 py-3">
+        <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+            <div class="shop_inner_inf">
+                <div class="privacy about">
+                    <h3>Sipariş <span>Özeti</span></h3>
+                    <div class="checkout-right">
+                        <h4><b><img src="~/Content/Resimler/Kullanici/like.png" />  Siparişleriniz</b></h4>
+
+                        @if (Model.Count == 0)
+                        {
+                            <section class="checkout py-lg-4 py-md-3 py-sm-3 py-3" style="text-align:center">
+                                <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+                                    <div class="shop_inner_inf">
+                                        <div class="privacy about">
+
+                                            <div class="checkout-right">
+                                                <h1>Daha Önce Hiç bir sipariş yapmamışsınız <i class="fa fa-frown-o" aria-hidden="true"></i><span>Sipariş Yapmanın tam zamanı... </span></h1>
+
+                                                <div class="col-md-4 checkout-left-basket" style="text-align:center; margin-left:300px">
+                                                    <h4><a href="/Urun/Index"><i class="fa fa-shopping-cart"> </i>    Sipariş Yapmak İçin Tıklayınız...</a></h4>
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        }
+
+
+
+
+
+                        @{
+
+                        }
+                        @foreach (var a in (List<List<SiparisDetay>>)ViewBag.SiparisDetay)
+
+                        {
+                            for (; k < 15;)
+                            {
+                                <img src="~/Content/Resimler/Kullanici/sepet.png" width="32" />
+                                <b style="font-size:23px"> Sipariş Id:</b> <b style="font-size:22px">@dizi[k]</b> <br />
+                                if (dizi2[k] == "Kargoda")
+                                {
+                                    <img src="~/Content/Resimler/Kullanici/delivery-truck.png" />
+                                    <b style="font-size:23px"> Sipariş Durum:</b> <b style="font-size:22px">@dizi2[k]</b>
+                                }
+                                else if (dizi2[k] == "Hazırlanıyor")
+                                {
+                                    <img src="~/Content/Resimler/Kullanici/shipping.png" />
+                                    <b style="font-size:23px"> Sipariş Durum:</b><b style="font-size:22px">@dizi2[k]</b>
+
+                                }
+                                else if (dizi2[k] == "Tamamlandı")
+                                { <img src="~/Content/Resimler/Kullanici/checked.png" />
+                                    <b style="font-size:23px"> Sipariş Durum:</b><b style="font-size:22px">@dizi2[k]</b>
+
+                                }
+                                else if (dizi2[k] == "İade Talebi")
+                                { <img src="~/Content/Resimler/Kullanici/x.png" />
+                                    <b style="font-size:23px"> Sipariş Durum:</b><b style="font-size:22px">@dizi2[k]</b>
+
+                                }
+                                <img src="~/Content/Resimler/Kullanici/budget.png" />
+                                <b style="font-size:23px"> Toplam Ücret:</b> <b style="font-size:22px">@dizi3[k].00 TL</b> <br />
+                                <img src="~/Content/Resimler/Kullanici/address.png" /> <b style="font-size:23px"> Sipariş Teslimat Adresi:</b><b style="font-size:22px">@dizi4[k]</b>
+
+                                k++;
+                                break;
+
+
+                            }
+                            <table class="timetable_sub">
+                                <thead>
+                                    <tr>
+
+                                        <th><img src="~/Content/Resimler/Kullanici/menu.png" style="margin-top:-2px" />Ürün Id</th>
+                                        <th> <img src="~/Content/Resimler/Kullanici/zoom-in.png" />Ürün Resim</th>
+                                        <th><img src="~/Content/Resimler/Kullanici/counting.png" style="margin-top:-2px" />Ürün Adet</th>
+                                        <th><img src="~/Content/Resimler/Kullanici/jigsaw.png" /> Ürün Renk</th>
+                                        <th><img src="~/Content/Resimler/Kullanici/name.png" style="margin-top:-2px" />Ürün Adi</th>
+                                        <th><img src="~/Content/Resimler/Kullanici/tag.png" style="margin-top:-2px" />Ürün Fiyat</th>
+
+                                        @*<th>Kargo Firması</th>
+                        <th>Odeme Tipi</th>
+                        <th>Siparis Durum</th>*@
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+
+                                    @foreach (var item in a)
+                                    {
+                                        <tr class="rem1">
+
+                                            <td class="invert" style="width:100px">@item.urunId</td>
+                                            <td class="invert-image" style="width:200px"><a href="/Urun/UrunDetay/@item.urunId"><img src="/Content/Resimler/Kullanici/@item.Urun.urunTekResim" alt=" " class="img-responsive"></a></td>
+                                            <td class="invert">
+                                                <div class="quantity">
+                                                    <div class="quantity-select">
+
+                                                        <div class="entry value"><span>@item.adet</span></div>
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="invert">@item.Urun.urunRenk</td>
+
+                                            <td class="invert">@item.Urun.urunAd</td>
+                                            <td class="invert">@(item.Urun.urunFiyat)  <b>TL</b></td>
+                                            @*<td class="invert">@item.Siparis.Kargo.Ad</td>
+                            <td class="invert">@item.Siparis.OdemeTipi.odemeTipi1</td>
+                            <td class="invert">@item.Siparis.SiparisDurum.siparisDurum1</td>*@
+
+
+                                        </tr>
+
+                                    }
+
+                                </tbody>
+                            </table>
+                        }
+
+
+
+
+
+
+                    </div>
+                    @*<ul style="font-size:18px">
+                        <li style="color:fuchsia">TESLİMAT ADRESİ</li>
+                        <li>   <b>Teslimat Adresi: @kullanici.kullaniciAdres</b></li>
+                        <li>    <b>Kargo Idniz: </b>@Model.kargoId <span>Bu kargo numarası ile Aras kargodan kargonuzun nerede olduğunu öğrenebilirsiniz...<a href="https://www.araskargo.com">www.araskargo.com</a></span></li>
+                    </ul>
+                    <ul style="font-size:18px">
+                        <li style="color:fuchsia">ÖDEME BİLGİLERİNİZ</li>
+
+                        <li><b>Kart Ay/Yıl: </b>@d.ayYıl</li>
+                        <li><b>Kart Üzerindeki Ad: </b>@d.kartUzerindekiAd</li>
+                        <li><b>Kart Üzerineki No: </b>@d.kartUzerindekiNo</li>
+                        @if (d.odemeTipiId == 1)
+                        {
+                            <li><b>Ödeme Tipi</b>Kredi Kartı</li>
+                        }
+
+
+
+                    </ul>*@
+
+                    <div class="checkout-left">
+                        <div class="col-md-4 checkout-left-basket">
+
+                            @*<ul>
+                                @foreach (var item in (List<SiparisDetay>)ViewBag.SiparisDetay)
+                                {
+
+                                    if (item.adet > 1)
+                                    {
+                                        <li><b style="font-size:13px">@item.Urun.urunAd         <i>  @item.Urun.urunFiyat * @item.adet </i>  <span> = +@(item.Urun.urunFiyat * item.adet) <b>TL</b></span></b>  </li>
+                                    }
+                                    else
+                                    {
+                                        <li><b style="font-size:13px">@item.Urun.urunAd </b>  <b> <i>  @item.Urun.urunFiyat </i>  <span> = +@(item.Urun.urunFiyat * item.adet) TL</span></b></li>
+                                    }
+
+
+
+
+
+                                }
+
+                                <li>Kargo Ücreti <i>-----</i> <span><del>-=4.99 TL</del></span></li>
+                                <li>Toplam Fiyat <i>---</i> <span><button class="btn btn-block" style="margin-bottom:9px; width:150px"> <i class="fa fa-shopping-cart"></i> 185 TL </button></span></li>
+                            </ul>*@
+                        </div>
+
+                        <div class="clearfix"> </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- //top products -->
+        </div>
+    </section>
+
+
+    <script src='~/Content/Tema/web/js/jquery-2.2.3.min.js'></script>
+</body>
+</html>

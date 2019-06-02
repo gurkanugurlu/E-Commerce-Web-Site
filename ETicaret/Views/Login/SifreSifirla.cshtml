@@ -1,0 +1,65 @@
+﻿@using ETicaret.Models
+@using ETicaret.Settings
+@model  Kullanici
+@{
+    ViewBag.Title = "SifreSifirla";
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Ego Toys Giriş Formu</title>
+
+    <!-- Meta-Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="keywords" content="Sleek Login Form Widget Responsive, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //Meta-Tags -->
+    <!-- Style -->
+    <link rel="stylesheet" href="~/Content/loginTema/web/css/style.css" type="text/css" media="all">
+
+    <!-- Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <!-- //Fonts -->
+
+</head>
+<body>
+    <h1>Şifremi Sıfırla...</h1>
+    @using (Html.BeginForm("SifreSifirla", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        if (ViewData["Hata"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                <h5><i class="icon fa fa-ban"></i> Dikkat!</h5>
+                @ViewData["Hata"]
+            </div>
+        }
+            <div class="w3layoutscontaineragileits">
+                @Html.HiddenFor(x => x.kullaniciId)
+                <ul>
+                    
+                    <li>
+                        <label><b style="font-size:14px">Yeni Şifreniz: </b></label>
+                        <input type="password" Name="sifre1" placeholder="Şifrenizi Giriniz." required="">
+                    </li>
+                    <li>
+                        <label><b style="font-size:14px">Yeni Şifreniz: </b></label>
+                        <input type="password" Name="sifre2" placeholder="Şifrenizi Giriniz." required="">
+                    </li>
+                </ul>
+                
+                
+
+                <div class="aitssendbuttonw3ls">
+
+                    <input type="submit" value="Talebi Gönder" style="margin-left:15px; bottom:-50px">
+                    <div class="clear"></div>
+                </div>
+
+            </div>
+    }
+</body>
+</html>

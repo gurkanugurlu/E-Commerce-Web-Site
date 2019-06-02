@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "YorumGonder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+@Html.Partial("resimDiv")
+<!--//banner -->
+<!-- short -->
+
+<section class="contact py-lg-4 py-md-3 py-sm-3 py-3">
+    <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+        <h3 class="title text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">Bize Ulaşın</h3>
+        <div class="contact-list-grid">
+            @using (Html.BeginForm("YorumGonder", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+            <div class=" agile-wls-contact-mid">
+                <div class="form-group contact-forms">
+                    <input type="text" name="name" class="form-control" placeholder="Adiniz" required />
+                </div>
+                <div class="form-group contact-forms">
+                    <input type="text" name="surname" class="form-control" placeholder="Soyadınız" required />
+                </div>
+                <div class="form-group contact-forms">
+                    <input type="text" name="comment" class="form-control" placeholder="Yorumunuz" required />
+                </div>
+                <div class="form-group contact-forms">
+                    <input type="file" name="resimGelen" class="form-control" placeholder="Resim giriniz">
+                </div>
+                <button type="submit" class="btn btn-outline-dark">Gönder</button>
+            </div>
+            }
+        </div>
+    </div>
+    <!--//contact-map -->
+</section>
+
+<script src='~/Content/Tema/web/js/jquery-2.2.3.min.js'></script>

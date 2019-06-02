@@ -1,0 +1,296 @@
+﻿@using ETicaret.Models;
+@using ETicaret.Settings;
+@{
+    ETicaretEntities db = new ETicaretEntities();
+    Kullanici kullanici = (Kullanici)Session["Kullanici"];
+    Sayilar sayilar = new Sayilar();
+    sayilar.urunSayisi = db.Urun.Count();
+    sayilar.kategoriSayisi = db.Kategori.Count();
+    sayilar.kullaniciSayisi = db.Kullanici.Count();
+    sayilar.markaSayisi = db.Marka.Count();
+    sayilar.altKategoriSayisi = db.AltKategori.Count();
+
+    int aboneSayisi=db.Abone.Count();
+    int urunSayisi = db.Urun.Count();
+    int yorum = db.Yorum.Count();
+    int siparis = db.Siparis.Count();
+    int bizeUlasın = db.BizeUlasin.Count();
+    int ePostaSayi = db.EpostaYayınla.Count();
+    int kSayi = db.Kampanya.Count(); ;
+    int iade = db.GeriIade.Count();
+
+ }
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="/Content/Tema1/plugins/font-awesome/css/font-awesome.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/Content/Tema1/dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="/Yonetici/Index" class="nav-link">Anasayfa</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="/Home/Contact" class="nav-link">İletisim</a>
+                </li>
+            </ul>
+            <!-- SEARCH FORM -->
+            
+            <!-- Right navbar links -->
+           
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="/Yonetici/Index" class="brand-link">
+                <img src="~/Content/Tema/web/images/foto.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                     style="opacity: .8">
+                <span class="brand-text font-weight-light">EgoToys</span>
+            </a>
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="~/Content/Resimler/Kullanici/@kullanici.kullaniciResim" class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block">@kullanici.kullaniciAd @kullanici.kullaniciSoyad </a>
+                    </div>
+                </div>
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+    with font-awesome or any other icon font library -->
+
+                        <li class="nav-item">
+                            <a href="/Home/Index" class="nav-link">
+
+                                <p>
+                                    <i class="nav-icon fa fa-home"></i> Web Site Anasayfa
+
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Yonetici/Index" class="nav-link">
+                                <i class="nav-icon fa fa-american-sign-language-interpreting"></i>
+                                <p>
+                                    Yönetici Paneli Anasayfa
+
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Yonetici/Kullanicilar" class="nav-link">
+                                <i class="nav-icon fa fa-user-circle"></i>
+                                <p>
+                                    Kullanicilar
+                                    <span class="right badge badge-info">@sayilar.kullaniciSayisi</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Yonetici/Urunler" class="nav-link">
+                                <i class="nav-icon fa fa-amazon"></i>
+                                <p>
+                                    Ürünler
+                                    <span class="right badge badge-info">@sayilar.urunSayisi</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Yonetici/Kategoriler" class="nav-link">
+                                <i class="nav-icon fa fa-barcode"></i>
+                                <p>
+                                    Kategoriler
+                                    <span class="right badge badge-info">@sayilar.kategoriSayisi</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Yonetici/AltKategoriler" class="nav-link">
+                                <i class="nav-icon fa fa-arrow-down"></i>
+                                <p>
+                                    Alt Kategoriler
+                                    <span class="right badge badge-info">@sayilar.altKategoriSayisi</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Yonetici/Marka" class="nav-link">
+                                <i class="nav-icon fa fa-briefcase"></i>
+                                <p>
+                                    Markalar
+                                    <span class="right badge badge-info">@sayilar.markaSayisi</span>
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/Yonetici/Siparisler" class="nav-link">
+                                <i class="nav-icon fa fa-shopping-cart"></i>
+                                <p>
+                                    Siparişler
+                                    <span class="right badge badge-info">@siparis</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Yonetici/Yorumlar" class="nav-link">
+                                <i class="nav-icon  fa fa-binoculars"></i>
+                                <p>
+                                    Yorumlar
+                                    <span class="right badge badge-info">@yorum</span>
+                                </p>
+                            </a>
+                        </li>
+                       
+                        <li class="nav-item">
+                            <a href="/Yonetici/GeriIade" class="nav-link">
+                                <i class="nav-icon  fa fa-building"></i>
+                                <p>
+                                    Geri Iade
+                                    <span class="right badge badge-info">@iade</span>
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/Yonetici/Ayarlar" class="nav-link">
+                                <i class="nav-icon fa fa-cogs"></i>
+                                <p>
+                                    Ayarlar
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Yonetici/BizeUlasin" class="nav-link">
+                                <i class="nav-icon fa fa-bookmark"></i>
+                                <p>
+                                    Bize Ulaşın
+                                    <span class="right badge badge-info">@bizeUlasın</span>
+                                </p>
+                            </a>
+                        </li><li class="nav-item">
+                            <a href="/Yonetici/Kampanya" class="nav-link">
+                                <i class="nav-icon fa fa-envelope"></i>
+                                <p>
+                                    Kampanyalar
+                                    <span class="right badge badge-info">5</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Yonetici/Abone" class="nav-link">
+                                <i class="nav-icon fa fa-trophy"></i>
+                                <p>
+                                    Aboneler
+                                    <span class="right badge badge-info">@aboneSayisi</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Yonetici/EPostalar" class="nav-link">
+                                <i class="nav-icon fa fa-envelope"></i>
+                                <p>
+                                    Epostalar
+                                    <span class="right badge badge-info">@ePostaSayi</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Kullanici/Cikis" class="nav-link">
+                                <i class="nav-icon fa fa-sign-out"></i>
+                                <p>
+                                    Oturumu Kapat
+                                    <span class="right badge badge-info"></span>
+                                </p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark">Yönetici Paneli</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <div class="content">
+                <div class="container-fluid">
+                    @RenderBody()
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+            <div class="p-3">
+                <h5>Title</h5>
+                <p>Sidebar content</p>
+            </div>
+        </aside>
+        <!-- /.control-sidebar -->
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="float-right d-none d-sm-inline">
+               
+            </div>
+            <!-- Default to the left -->
+            <strong>Tüm haklar &copy; 2014-2018 <a href="https://adminlte.io">AdminLTE.io ya aittir.</a></strong> 
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="~/Content/Tema1/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/Tema1/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <<script src="~/Content/Tema1/dist/js/adminlte.min.js"></script>
+
+   
+</body>
+</html>
