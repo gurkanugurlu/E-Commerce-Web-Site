@@ -17,8 +17,8 @@ namespace ETicaret.Settings
 
                 
                 
-                string gonderenEposta = "gurkan_henry_96@hotmail.com";
-                string gonderenSifre = "5a1s120ae7d6z";
+                string gonderenEposta = "asasasa";
+                string gonderenSifre = "assasasaa";
                 smtp.UseDefaultCredentials = false;
                 smtp.Credentials = new System.Net.NetworkCredential(gonderenEposta, gonderenSifre);
                 smtp.Port = 587;
